@@ -1,0 +1,282 @@
+/* =========================== */
+/* 🌟 Icon đặc trưng trong phần giới thiệu dịch vụ */
+/* =========================== */
+.feature-icon {
+    width: 48px; /* Chiều rộng cố định của icon */
+    height: 48px; /* Chiều cao cố định của icon */
+}
+
+
+/* =========================== */
+/* 📦 Hình ảnh trong .thumbnail và .product-item */
+/* =========================== */
+.thumbnail img,
+.product-item img {
+    width: 100%; /* Chiếm toàn bộ chiều ngang thẻ cha */
+    height: 200px; /* Chiều cao cố định để các ảnh đồng đều */
+    object-fit: cover; /* Phóng to ảnh cho vừa khung, cắt phần dư */
+    border-radius: 0.5rem; /* Bo góc ảnh nhẹ */
+    transition: transform 0.3s ease; /* Hiệu ứng khi hover */
+}
+
+.thumbnail:hover img,
+.product-item:hover img {
+    transform: scale(1.05); /* Phóng nhẹ ảnh khi hover */
+}
+
+
+/* =========================== */
+/* 📦 Khối sản phẩm (.thumbnail) */
+/* =========================== */
+
+.thumbnail {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    position: relative;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    overflow: hidden;
+    
+    
+}
+
+
+.thumbnail:hover {
+    border: 1px solid black; /* đảm bảo có viền đen */
+    box-shadow: 0 8px 20px rgba(0,0,0,0.1); /* Đổ bóng */
+}
+
+
+/* =========================== */
+/* 🌓 Lớp phủ overlay khi hover sản phẩm */
+/* =========================== */
+.thumbnail .overlay,
+.product-item .overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5); /* Overlay đen trong suốt */
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    font-weight: bold;
+    font-size: 1rem;
+    opacity: 0; /* Mặc định ẩn */
+    transition: opacity 0.3s ease;
+    pointer-events: none;
+}
+
+.thumbnail:hover .overlay,
+.product-item:hover .overlay {
+    opacity: 1; /* Hiện overlay khi hover */
+}
+
+
+/* =========================== */
+/* 🛒 Nút "Thêm vào giỏ hàng" trong overlay */
+/* =========================== */
+.overlay button {
+    margin-top: 10px;
+    background-color: #ffc107; /* Màu vàng tươi */
+    color: #000;
+    font-weight: 600;
+    border: none;
+    padding: 8px 18px;
+    border-radius: 25px;
+    cursor: pointer;
+    font-size: 0.95rem;
+    transition: background-color 0.2s ease-in-out;
+}
+
+.overlay button:hover {
+    background-color: #e0a800; /* Màu vàng đậm hơn khi hover */
+}
+
+
+/* =========================== */
+/* ⭐ Hiển thị số sao đánh giá sản phẩm */
+/* =========================== */
+.rating {
+    font-size: 1rem;
+}
+
+
+/* =========================== */
+/* 🧾 Mô tả sản phẩm dưới ảnh */
+/* =========================== */
+.caption {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.caption h3, .caption p {
+    margin: 0;
+}
+
+.caption p {
+    margin-top: 10px;
+}
+
+
+/* =========================== */
+/* 📤 Icon chức năng như ❤️ hoặc 🗑 */
+/* =========================== */
+.action-icons {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    z-index: 3; /* Nằm trên overlay */
+}
+
+.action-icons i {
+    color: #dc3545; /* Màu đỏ */
+    font-size: 1.2rem;
+    background-color: #fff;
+    padding: 6px;
+    border-radius: 50%;
+    cursor: pointer;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    transition: background-color 0.3s;
+}
+
+.action-icons i:hover {
+    background-color: #f8d7da; /* Hồng nhạt khi hover */
+}
+
+
+/* =========================== */
+/* 🧭 Phần slider sản phẩm ngang */
+/* =========================== */
+.product-track-wrapper {
+    overflow-x: auto; /* Kéo ngang */
+    overflow-y: hidden;
+    white-space: nowrap;
+}
+
+.product-track {
+    display: flex;
+    gap: 1rem;
+    transition: transform 0.3s ease-in-out;
+    will-change: transform;
+}
+
+.product-item {
+    flex: 0 0 calc(25% - 1rem); /* Hiển thị 4 sản phẩm mỗi dòng */
+    box-sizing: border-box;
+    position: relative;
+    overflow: hidden;
+}
+
+
+/* =========================== */
+/* ⏩ Nút di chuyển slider trái/phải */
+/* =========================== */
+.slider-btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(0, 0, 0, 0.5);
+    border: none;
+    color: white;
+    font-size: 1.5rem;
+    padding: 5px 10px;
+    z-index: 10;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+.slider-btn:hover {
+    background: rgba(0, 0, 0, 0.8);
+}
+
+.slider-btn.left {
+    left: 0;
+}
+
+.slider-btn.right {
+    right: 0;
+}
+
+
+/* =========================== */
+/* 📷 Ảnh carousel đầu trang */
+/* =========================== */
+.carousel-inner img {
+    height: 400px;
+    object-fit: cover;
+}
+
+
+/* =========================== */
+/* 🧭 Menu danh mục dưới slider */
+/* =========================== */
+.category-menu {
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+    margin-bottom: 2rem;
+    font-size: 1.2rem;
+}
+
+.category-menu a {
+    text-decoration: none;
+    color: #050202;
+}
+
+.category-menu a:hover {
+    color: #007bff;
+}
+
+
+/* =========================== */
+/* 🌈 Navbar với nền gradient */
+/* =========================== */
+.navbar {
+    background: linear-gradient(to right, #0f2027, #203a43, #2c5364);
+}
+
+.navbar-brand span {
+    font-family: 'Segoe UI', sans-serif;
+    font-size: 1.2rem;
+    letter-spacing: 1px;
+}
+
+
+/* =========================== */
+/* 📐 Kích thước tổng thể body */
+/* =========================== */
+html, body {
+    height: 100%;
+    margin: 0;
+}
+
+.wrapper {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+main {
+    flex: 1;
+}
+/* hover navbar */
+.navbar .nav-link {
+    transition: all 0.3s ease;
+  }
+  
+  .navbar .nav-link:hover {
+    color: rgb(249, 252, 251) !important; /* đổi thành màu bạn muốn */
+    text-decoration: underline; /* hoặc none, nếu không muốn gạch chân */
+  }
+
+
