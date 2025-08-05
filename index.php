@@ -40,11 +40,40 @@ if ((isset($_GET['act'])) && ($_GET['act'] != "")) {
             // Lấy id danh mục nếu bấm vào danh mục
             $iddm = isset($_GET['iddm']) ? $_GET['iddm'] : 0;
 
+            // Kiểm tra và tìm kiếm sản phẩm theo từ khóa
+            if (!empty($kyw)) {
+                if (strlen($kyw) >= 3) {  // Kiểm tra nếu từ khóa dài ít nhất 3 ký tự
+                    // Tìm sản phẩm theo từ khóa và danh mục (nếu có)
+                    $spnew = loadall_sanpham($kyw, $iddm);
+                    if (empty($spnew)) {
+                        $thongbao_sanpham = "Không có sản phẩm phù hợp với từ khóa \"$kyw\".";
+                    } else {
+                        $thongbao_sanpham = "Đã tìm thấy " . count($spnew) . " sản phẩm phù hợp với từ khóa \"$kyw\".";
+                    }
+                } else {
+                    // Nếu từ khóa quá ngắn, thông báo cho khách hàng
+                    $thongbao_sanpham = "Từ khóa tìm kiếm phải có ít nhất 3 ký tự!";
+                    $spnew = []; // Không thực hiện tìm kiếm nếu từ khóa quá ngắn
+                }
+            } else {
+                $spnew = []; // Nếu không có từ khóa, không tìm kiếm
+            }
+
+            // Kiểm tra nếu có danh mục được chọn
+            if ($iddm > 0) {
+                // Tìm sản phẩm trong danh mục nếu có iddm
+                $spnew = loadall_sanpham("", $iddm); // Tìm sản phẩm theo danh mục
+                if (empty($spnew)) {
+                    $thongbao_danhmuc = "Danh mục này không có sản phẩm!";
+                } else {
+                    // Lấy tên danh mục
+                    $tendm = load_ten_dm($iddm);
+                    $thongbao_danhmuc = "Danh mục \"$tendm\" có " . count($spnew) . " sản phẩm.";
+                }
+            }
+
             // Load danh sách danh mục để hiển thị
             $dsdm = loadall_danhmuc();
-
-            // Load sản phẩm theo từ khóa và danh mục
-            $spnew = loadall_sanpham($kyw, $iddm);
 
             // Lấy tên danh mục nếu có iddm
             if ($iddm > 0) {
@@ -53,8 +82,14 @@ if ((isset($_GET['act'])) && ($_GET['act'] != "")) {
                 $tendm = "Tất cả sản phẩm";
             }
 
+            // Gửi dữ liệu và hiển thị view
             include "view/home.php";
-            break;;
+            break;
+
+
+
+
+
 
         case 'sanphamct':
 
@@ -72,52 +107,72 @@ if ((isset($_GET['act'])) && ($_GET['act'] != "")) {
 
             break;
         case 'dangky':
-            if (isset($_POST['dangky']) && ($_POST['dangky'])) {
+            if (!empty($_POST['dangky'])) {
                 $email = $_POST['email'];
                 $user = $_POST['user'];
                 $fullname = $_POST['fullname'];
                 $password = $_POST['password'];
                 $repassword = $_POST['repassword'];
 
-                // Kiểm tra tên đăng nhập dài tối thiểu 8 ký tự
+                // Kiểm tra tên đăng nhập >= 8 ký tự
                 if (strlen($user) < 8) {
-                    echo "<script>alert('Tên đăng nhập phải từ 8 ký tự trở lên!');</script>";
-                }
-                // Kiểm tra độ mạnh của mật khẩu
-                elseif (
-                    strlen($password) < 8 ||
-                    !preg_match('/[A-Z]/', $password) ||         // ít nhất 1 chữ hoa
-                    !preg_match('/[^a-zA-Z0-9]/', $password)      // ít nhất 1 ký tự đặc biệt
-                ) {
-                    echo "<script>alert('Mật khẩu phải có ít nhất 8 ký tự, gồm chữ hoa và ký tự đặc biệt!');</script>";
-                }
-                // Kiểm tra nhập lại mật khẩu
-                elseif ($password !== $repassword) {
-                    echo "<script>alert('Mật khẩu nhập lại không khớp!');</script>";
-                } else {
-                    // Kiểm tra tài khoản đã tồn tại hay chưa
-                    $checkuser = trungtenkhidangky($user);
-                    if ($checkuser) {
-                        echo "<script>alert('Tên đăng nhập đã tồn tại, vui lòng chọn tên khác!');</script>";
-                    } else {
-                        // Mã hóa mật khẩu
-                        $password_md5 = md5($password);
-
-                        // Tiến hành thêm vào CSDL
-                        insert_taikhoan($email, $user, $fullname, $password_md5);
-                        $_SESSION['thongbao'] = "Đăng ký thành công, vui lòng đăng nhập!";
-
-                        echo "<script>
-                                alert('Đăng ký thành công!');
-                                window.location.href='index.php?act=dangnhap';
-                            </script>";
-                        exit();
-                    }
-                    // Nếu có lỗi → quay lại trang đăng ký
-                    header("Location: index.php?act=dangky");
+                    echo "<script>
+                    alert('Tên đăng nhập phải từ 8 ký tự trở lên!');
+                    window.location.href='index.php?act=dangky';
+                  </script>";
                     exit();
                 }
+
+                // Kiểm tra mật khẩu: ít nhất 8 ký tự, có chữ hoa và ký tự đặc biệt
+                if (strlen($password) < 8 || !preg_match('/[A-Z]/', $password) || !preg_match('/[^a-zA-Z0-9]/', $password)) {
+                    echo "<script>
+                    alert('Mật khẩu phải có ít nhất 8 ký tự, gồm chữ hoa và ký tự đặc biệt!');
+                    window.location.href='index.php?act=dangky';
+                  </script>";
+                    exit();
+                }
+
+                // Kiểm tra mật khẩu nhập lại khớp
+                if ($password !== $repassword) {
+                    echo "<script>
+                    alert('Mật khẩu nhập lại không khớp!');
+                    window.location.href='index.php?act=dangky';
+                  </script>";
+                    exit();
+                }
+
+                // Kiểm tra tên đăng nhập đã tồn tại chưa
+                if (trungtenkhidangky($user)) {
+                    echo "<script>
+                    alert('Tên đăng nhập đã tồn tại, vui lòng chọn tên khác!');
+                    window.location.href='index.php?act=dangky';
+                  </script>";
+                    exit();
+                }
+
+                // Kiểm tra email đã tồn tại chưa
+                if (trungemailkhidangky($email)) {
+                    echo "<script>
+                    alert('Email đã được sử dụng, vui lòng nhập email khác!');
+                    window.location.href='index.php?act=dangky';
+                  </script>";
+                    exit();
+                }
+
+                // Mã hóa mật khẩu và thêm tài khoản mới
+                $password_md5 = md5($password);
+                insert_taikhoan($email, $user, $fullname, $password_md5);
+
+                // Thông báo đăng ký thành công và chuyển sang trang đăng nhập
+                $_SESSION['thongbao'] = "Đăng ký thành công, vui lòng đăng nhập!";
+                echo "<script>
+                alert('Đăng ký thành công!');
+                window.location.href='index.php?act=dangnhap';
+              </script>";
+                exit();
             }
+
+            // Hiển thị form đăng ký
             include "view/taikhoan/dangky.php";
             break;
 
@@ -159,19 +214,14 @@ if ((isset($_GET['act'])) && ($_GET['act'] != "")) {
                 if (is_array($checkuser)) {
                     $_SESSION['user'] = $checkuser;
 
-                    // ✅ Thông báo + chuyển trang sau
+                    // Chuyển hướng bằng header, không dùng alert nữa (alert sẽ làm mất tự động chuyển trang)
                     if ($checkuser['role'] == 1) {
-                        echo "<script>
-                                alert('Đăng nhập thành công (quyền admin)!');
-                                window.location.href = 'admin/index.php';
-                            </script>";
+                        header("Location: admin/index.php?act=thongketongquan");
+                        exit();
                     } else {
-                        echo "<script>
-                                alert('Đăng nhập thành công!');
-                                window.location.href = 'index.php';
-                            </script>";
+                        header("Location: index.php");
+                        exit();
                     }
-                    exit();
                 } else {
                     $tk = trungtenkhidangky($user);
                     if (!$tk) {
@@ -184,6 +234,7 @@ if ((isset($_GET['act'])) && ($_GET['act'] != "")) {
 
             include "view/taikhoan/dangnhap.php";
             break;
+
 
         // case 'edit_tk':
 
@@ -307,19 +358,31 @@ if ((isset($_GET['act'])) && ($_GET['act'] != "")) {
                 echo "<script>window.location.href='index.php?act=dangnhap';</script>";
                 exit();
             }
+            // Kiểm tra nếu người dùng chưa đăng nhập thì chuyển hướng đến trang đăng nhập
+            if (!isset($_SESSION['user'])) {
+                header("Location: index.php?act=dangnhap");
+                exit;
+            }
+            $iduser = $_SESSION['user']['id'];
+            $idpro = $_POST['id'];
+            $name = $_POST['name'];
+            $img = $_POST['img'];
+            $price = $_POST['price'];
+            $soluong = intval($_POST['soluong']);
 
-            if (isset($_POST['addtocart'])) {
-                $iduser = $_SESSION['user']['id'];
-                $idpro = $_POST['id'];
-                $name = $_POST['name'];
-                $img = $_POST['img'];
-                $price = $_POST['price'];
-                $soluong = $_POST['soluong'] ?? 1;
-                $thanhtien = $soluong * $price;
-
-                insert_cart_temp($iduser, $idpro, $img, $name, $price, $soluong, $thanhtien);
-                header("Location: index.php?act=viewcart");
-                exit();
+            // Hàm kiểm tra sản phẩm đã có trong giỏ chưa
+            if (check_product_in_cart($iduser, $idpro)) {
+                // Nếu đã có thì thông báo không cho thêm nữa
+                echo "<script>alert('Sản phẩm đã có trong giỏ hàng! Vui lòng vào giỏ hàng để thay đổi số lượng.'); 
+                window.location.href='index.php?act=viewcart';</script>";
+            } else {
+                // Thêm sản phẩm vào giỏ
+                $result = add_to_cart($iduser, $idpro, $img, $name, $price, $soluong);
+                if ($result) {
+                    echo "<script>alert('Thêm sản phẩm vào giỏ hàng thành công!'); window.location.href='index.php?act=viewcart';</script>";
+                } else {
+                    echo "<script>alert('Thêm sản phẩm thất bại!'); window.location.href='index.php';</script>";
+                }
             }
             break;
 
@@ -342,6 +405,7 @@ if ((isset($_GET['act'])) && ($_GET['act'] != "")) {
                 header("Location: index.php?act=dangnhap");
             }
             break;
+
 
 
         case 'bill':

@@ -66,7 +66,7 @@ if (isset($_SESSION['user'])) {
                     <!-- Menu trái -->
                     <div class="navbar-nav me-auto gap-2 fs-6">
                         <a class="nav-link active text-white" href="index.php">Trang chủ</a>
-                        <a class="nav-link text-white" href="#">Giới thiệu</a>
+                        <a class="nav-link text-white" href="https://biahoihanoi.vn/gioi-thieu">Giới thiệu</a>
                         <a class="nav-link text-white" href="#">Liên hệ</a>
                         <a class="nav-link text-white" href="#">Góp ý</a>
                         <a class="nav-link text-white" href="#">Giải đáp</a>
@@ -74,9 +74,11 @@ if (isset($_SESSION['user'])) {
 
                     <!-- Tìm kiếm -->
                     <form class="d-flex me-3" role="search" action="index.php?act=home#showproduct" method="post">
-                        <input class="form-control form-control-sm me-2" type="search" placeholder="Tìm kiếm..." name="kyw">
+                        <input class="form-control form-control-sm me-2" type="search" placeholder="Tìm kiếm..." name="kyw"
+                            value="<?php echo isset($_POST['kyw']) ? htmlspecialchars($_POST['kyw']) : ''; ?>">
                         <button class="btn btn-warning btn-sm" type="submit">Tìm</button>
                     </form>
+
 
                     <!-- Tài khoản & giỏ hàng -->
                     <div class="d-flex align-items-center gap-2">

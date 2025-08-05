@@ -1,3 +1,5 @@
+<script src="https://cdn.ckeditor.com/4.16.2/standard/ckeditor.js"></script>
+
 <div class="main-content ">
     <div class="card shadow-sm">
         <div class="card-header bg-primary text-white">
@@ -44,7 +46,7 @@
 
                 <div class="mb-3">
                     <label class="form-label">Mô tả</label>
-                    <textarea name="mota" class="form-control" rows="5" required></textarea>
+                    <textarea name="mota" id="mota" class="form-control" rows="5" required></textarea>
                 </div>
 
                 <div class="d-flex gap-2">
@@ -62,7 +64,7 @@
         </div>
     </div>
 </div>
-// Preview ảnh chính
+<!-- // Preview ảnh chính -->
 <script>
     function previewImage(event) {
         const input = event.target;
@@ -80,7 +82,7 @@
         }
     }
 </script>
-// Preview ảnh phụ
+<!-- // Preview ảnh phụ -->
 <script>
     document.getElementById('anhphu').addEventListener('change', function(event) {
         const previewContainer = document.getElementById('preview-anhphu');
@@ -102,4 +104,8 @@
             reader.readAsDataURL(file);
         });
     });
+</script>
+<!-- // văn bản mô tả -->
+<script>
+    CKEDITOR.replace('mota');
 </script>

@@ -5,7 +5,7 @@ if (is_array($sp)) {
     $hinhpath = "../upload/" . $img;
 }
 ?>
-
+<script src="https://cdn.ckeditor.com/4.16.2/standard/ckeditor.js"></script>
 <div class="main-content">
     <div class="card shadow-sm">
         <div class="card-header bg-primary text-white">
@@ -69,7 +69,7 @@ if (is_array($sp)) {
                 <!-- Mô tả -->
                 <div class="mb-3">
                     <label class="form-label">Mô tả</label>
-                    <textarea name="mota" class="form-control" rows="5" required><?= $mota ?></textarea>
+                    <textarea name="mota" id="mota" rows="5" required><?= $mota ?></textarea>
                 </div>
 
                 <!-- Nút -->
@@ -124,4 +124,8 @@ if (is_array($sp)) {
             reader.readAsDataURL(file);
         });
     });
+</script>
+<!-- // văn bản mô tả -->
+<script>
+    CKEDITOR.replace('mota');
 </script>

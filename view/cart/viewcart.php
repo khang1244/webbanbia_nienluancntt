@@ -50,7 +50,10 @@
                                 <td><img src="' . $hinh . '" alt="" class="img-thumbnail" style="height: 60px;"></td>
                                 <td>' . $item['name'] . '</td>
                                 <td>' . number_format($item['price'], 0, ',', '.') . ' VND</td>
-                                <td>' . $item['soluong'] . '</td>
+                                <td>
+                                    <input type="number" name="soluong[' . $item['idpro'] . ']" value="' . $item['soluong'] . '" min="1" class="form-control" style="width: 70px; margin: auto;">
+                                </td>
+
                                 <td>' . number_format($ttien, 0, ',', '.') . ' VND</td>
                                 <td>' . $xoasp . '</td>
                             </tr>';
@@ -83,6 +86,6 @@
     </div>
 
 </body>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
 
 </html>

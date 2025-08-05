@@ -139,22 +139,22 @@ if (isset($_GET['act'])) {
             // Hiển thị form
             include "sanpham/add.php";
             break;
-
         case 'listsp':
-            // Phân trang: mỗi trang 5 sản phẩm
-            $limit = 3;
+            // Phân trang: mỗi trang 3 sản phẩm
+            $limit = 4;
             $page = isset($_GET['page']) && is_numeric($_GET['page']) ? intval($_GET['page']) : 1;
             $start = ($page - 1) * $limit;
 
             // Lấy danh sách danh mục
             $listdanhmuc = loadall_danhmuc();
+
             // Xử lý từ khóa và iddm
             if (isset($_POST['listok']) && ($_POST['listok'])) {
                 $kyw = $_POST['kyw'];
                 $iddm = $_POST['iddm'];
             } else {
-                $kyw = '';
-                $iddm = 0;
+                $kyw = isset($_GET['kyw']) ? $_GET['kyw'] : '';  // Lấy giá trị từ GET nếu có
+                $iddm = isset($_GET['iddm']) ? $_GET['iddm'] : 0;
             }
 
             // Lấy danh sách sản phẩm có phân trang
@@ -172,7 +172,6 @@ if (isset($_GET['act'])) {
 
             include "sanpham/list.php";
             break;
-
 
         case 'xoasp':
             if (isset($_GET['id']) && $_GET['id'] > 0) {
@@ -399,6 +398,26 @@ if (isset($_GET['act'])) {
             $listtaikhoan = loadall_taikhoan();
             include "taikhoan/listtaikhoan.php";
             break;
+
+        case 'capnhatroleadmin':
+            if (isset($_POST['id']) && isset($_POST['role'])) {
+                $id = $_POST['id'];
+                $role = $_POST['role'];
+
+                // Không cho admin tự đổi vai trò chính mình
+                if ($_SESSION['user']['id'] == $id) {
+                    $_SESSION['message'] = "Bạn không thể đổi vai trò của chính mình!";
+                } else {
+                    update_role($id, $role); // <-- bạn cần có hàm này trong model
+                    $_SESSION['message'] = "Cập nhật vai trò thành công!";
+                }
+
+                header("Location: index.php?act=danhsachkhachhang");
+                exit;
+            }
+            break;
+
+
         case 'edit_taikhoan_admin':
 
             if (isset($_POST['capnhat'])) {

@@ -12,10 +12,10 @@
         <div class="carousel-item active">
             <img src="images/products/1.jpg" class="d-block w-100" style="height: 400px; object-fit: cover;" alt="Slide 1">
         </div>
-        <div class="carousel-item active">
+        <div class="carousel-item ">
             <img src="images/products/baner2.png" class="d-block w-100" style="height: 400px; object-fit: cover;" alt="Slide 2">
         </div>
-        <div class="carousel-item active">
+        <div class="carousel-item ">
             <img src="images/products/baner1.jpg" class="d-block w-100" style="height: 400px; object-fit: cover;" alt="Slide 3">
         </div>
     </div>
@@ -72,20 +72,23 @@
     <div class="card shadow border-0">
         <div class="card-body">
             <div class="d-flex justify-content-between align-items-center mb-3">
-                <!-- Icon trái -->
+                <!-- Icon trái
                 <div class="d-none d-md-block">
                     <i class="bi bi-tags-fill text-warning fs-4"></i>
-                </div>
+                </div> -->
+
 
                 <!-- Tiêu đề giữa -->
                 <h4 class="text-primary fw-bold mb-0 text-center flex-fill">
                     <i class="bi bi-list-ul me-2"></i> DANH MỤC SẢN PHẨM
                 </h4>
 
-                <!-- Icon phải -->
+
+                <!-- Icon phải
                 <div class="d-none d-md-block">
                     <i class="bi bi-box-seam-fill text-success fs-4"></i>
-                </div>
+                </div> -->
+
             </div>
 
             <!-- Các nút danh mục -->
@@ -97,9 +100,11 @@
                     extract($danhmuc);
                     $linkdm = "index.php?act=home&iddm=" . $id;
                     $active = ($iddm_selected == $id) ? 'btn-primary text-white fw-bold' : 'btn-outline-success';
+                    // Lấy số lượng sản phẩm trong danh mục
+                    $count_sanpham = count_sanpham_theo_danhmuc($id);
                     echo '
                     <a href="' . $linkdm . '" class="btn ' . $active . ' px-4 py-2">
-                        <i class="bi bi-box-seam"></i> ' . $name . '
+                        <i class="bi bi-box-seam"></i> ' . $name . ' (' . $count_sanpham . ' )
                     </a>';
                 }
                 ?>
@@ -108,8 +113,23 @@
     </div>
 </div>
 
+
 <!-- SẢN PHẨM CỦA CHÚNG TÔI -->
 <h2 id="showproduct" class="text-center mb-4 mt-5 fw-bold text-success">SẢN PHẨM CỦA CHÚNG TÔI</h2>
+<!-- Thông báo tìm kiếm sản phẩm -->
+<?php if (isset($thongbao_sanpham)): ?>
+    <div class="alert <?= (isset($spnew) && empty($spnew)) ? 'alert-danger' : 'alert-info' ?>" role="alert">
+        <?= $thongbao_sanpham ?>
+    </div>
+<?php endif; ?>
+
+<!-- Thông báo tìm kiếm danh mục -->
+<?php if (isset($thongbao_danhmuc)): ?>
+    <div class="alert <?= (isset($danhmuc_result) && empty($danhmuc_result)) ? 'alert-danger' : 'alert-info' ?>" role="alert">
+        <?= $thongbao_danhmuc ?>
+    </div>
+<?php endif; ?>
+
 <div class="row g-4">
     <?php
     foreach ($spnew as $sp) {

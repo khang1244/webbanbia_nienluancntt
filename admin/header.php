@@ -7,15 +7,18 @@
     <title>Quản trị Admin</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <script src="https://kit.fontawesome.com/8c204d0fdf.js" crossorigin="anonymous"></script>
+
     <!-- <link rel="stylesheet" href="css/main.css"> -->
 </head>
 
 <body>
-    <div class="container-fluid">
-        <div class="row">
+    <div class="container-fluid p-0">
+        <div class="d-flex min-vh-100">
             <!-- Sidebar -->
-            <div class="col-md-2 bg-primary text-white vh-100 p-0">
+            <div class="bg-primary text-white p-0" style="width: 250px;">
+
                 <div class="text-center py-3 fw-bold fs-4 border-bottom">ADMIN</div>
+
                 <ul class="nav flex-column px-2">
                     <li class="nav-item"><a class="nav-link text-white" href="index.php?act=thongketongquan"><i class="fa-solid fa-chart-line me-2"></i>Thống kê tổng quan</a></li>
                     <li class="nav-item"><a class="nav-link text-white" href="index.php?act=listdm"><i class="fa-solid fa-folder-open me-2"></i>Quản lý Danh mục</a></li>
@@ -60,5 +63,7 @@
                         </ul>
                     </div>
                 </nav>
-
+                <marquee behavior="scroll" direction="left" scrollamount="5" class="bg-white text-dark py-2 fw-bold">
+                    🔔 Chào mừng bạn đến với trang quản trị! Hãy cập nhật sản phẩm thường xuyên để giữ nội dung mới nhất!
+                </marquee>
                 <div class="p-4">

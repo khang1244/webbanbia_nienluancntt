@@ -119,13 +119,7 @@ function tangluotxem($id)
     $sql = "UPDATE sanpham SET luotxem = luotxem + 1 WHERE id = $id";
     pdo_execute($sql);
 }
-// Khi bấm  vào danh mục thì hiển thị sản phẩm theo danh mục đó
-function load_ten_dm($iddm)
-{
-    $sql = "SELECT name FROM danhmuc WHERE id = $iddm";
-    $dm = pdo_query_one($sql);
-    return $dm['name'];
-}
+
 // hàm tổng quan sản phẩm trong admin
 function count_sanpham()
 {

@@ -15,18 +15,21 @@
             <!-- Từ khóa tìm kiếm -->
             <div class="col-md-5">
                 <label class="form-label">Từ khóa</label>
-                <input type="text" name="kyw" class="form-control" placeholder="Nhập tên sản phẩm..." value="<?= isset($kyw) ? $kyw : '' ?>" autocomplete="off">
+                <input type="text" name="kyw" class="form-control" placeholder="Nhập tên sản phẩm..."
+                    value="<?= isset($_POST['kyw']) ? htmlspecialchars($_POST['kyw']) : '' ?>" autocomplete="off">
             </div>
 
             <!-- Dropdown danh mục -->
             <div class="col-md-4">
                 <label class="form-label">Danh mục</label>
                 <select name="iddm" class="form-select">
-                    <option value="0">Tất cả</option>
+                    <option value="0" <?= (!isset($_POST['iddm']) || $_POST['iddm'] == 0) ? 'selected' : '' ?>>Tất cả</option>
                     <?php
                     foreach ($listdanhmuc as $danhmuc) {
                         extract($danhmuc);
-                        echo '<option value="' . $id . '" >' . $name . '</option>';
+                        // Giữ lại giá trị danh mục đã chọn
+                        $selected = (isset($_POST['iddm']) && $_POST['iddm'] == $id) ? 'selected' : '';
+                        echo '<option value="' . $id . '" ' . $selected . '>' . $name . '</option>';
                     }
                     ?>
                 </select>
@@ -39,6 +42,7 @@
             </div>
 
         </form>
+
 
         <table id="example" class="table table-striped text-center" style="width:100%">
             <thead>

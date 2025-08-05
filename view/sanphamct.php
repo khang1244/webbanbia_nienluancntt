@@ -1,12 +1,15 @@
 <!-- CHI TIẾT SẢN PHẨM -->
 <div class="container my-5">
     <!-- Breadcrumb -->
-    <nav class="mb-4">
-        <small>
-            <a href="index.php" class="text-decoration-none text-dark">Trang Chủ</a> /
-            <span class="text-muted">Chi Tiết Sản Phẩm</span>
-        </small>
+    <nav aria-label="breadcrumb" class="mb-4">
+        <ol class="breadcrumb fs-5 fw-semibold text-dark">
+            <li class="breadcrumb-item">
+                <a href="index.php" class="text-decoration-none text-primary">Trang Chủ</a>
+            </li>
+            <li class="breadcrumb-item active text-muted" aria-current="page">Chi Tiết Sản Phẩm</li>
+        </ol>
     </nav>
+
 
     <div class="row bg-white shadow rounded-4 p-4 align-items-center">
         <?php
@@ -39,20 +42,20 @@
         echo '</div>'; // đóng col-md-5
         ?>
 
-
-
         <!-- Thông tin sản phẩm -->
         <div class="col-md-7">
-            <h2 class="fw-bold mb-3" style="font-size: 28px;"><?= $name ?></h2>
+            <h2 class="fw-bold mb-3" style="font-size: 34px;"><?= $name ?></h2>
 
+            <!-- Đánh giá sản phẩm -->
             <div class="d-flex align-items-center text-warning mb-2">
                 <span class="fs-5">★★★★★</span>
-                <span class="text-muted small ms-2">1 đánh giá | <a href="#" class="text-decoration-none">Viết đánh giá</a></span>
+                <span class="text-muted small ms-2" style="font-size: 17px;">đánh giá | <a href="#" class="text-decoration-none">Viết đánh giá</a></span>
             </div>
 
-            <h4 class="text-danger fw-bold mb-4" style="font-size: 24px;">Giá bán: <?= number_format($price, 0, ',', '.') ?> VNĐ</h4>
+            <!-- Giá sản phẩm -->
+            <h4 class="text-danger fw-bold mb-4" style="font-size: 23px;">Giá bán: <?= number_format($price, 0, ',', '.') ?> VNĐ</h4>
 
-            <!-- Form thêm vào giỏ -->
+            <!-- Form thêm vào giỏ hàng -->
             <form action="index.php?act=addtocart" method="post">
                 <input type="hidden" name="id" value="<?= $id ?>">
                 <input type="hidden" name="name" value="<?= $name ?>">
@@ -60,36 +63,48 @@
                 <input type="hidden" name="price" value="<?= $price ?>">
 
                 <!-- Chọn số lượng -->
-                <div class="input-group mb-3" style="width: 160px;">
+                <div class="input-group mb-3" style="width: 140px;">
                     <button class="btn btn-outline-secondary" type="button" onclick="this.parentElement.querySelector('input').stepDown()">-</button>
                     <input type="number" name="soluong" value="1" min="1" class="form-control text-center">
                     <button class="btn btn-outline-secondary" type="button" onclick="this.parentElement.querySelector('input').stepUp()">+</button>
                 </div>
 
-                <!-- Nút thêm -->
-                <button type="submit" name="addtocart" class="btn btn-warning w-100 py-2 fw-bold rounded-pill">
+                <!-- Nút thêm vào giỏ -->
+                <button type="submit" name="addtocart" class="btn btn-warning w-100  py-2 fw-bold rounded-pill">
                     <i class="bi bi-cart-plus me-2"></i>Thêm vào giỏ hàng
                 </button>
             </form>
 
-            <!-- Thông tin thêm -->
-            <div class="d-flex justify-content-between mt-3 text-muted small">
-                <span><i class="bi bi-heart me-1"></i> Yêu thích</span>
-                <span><i class="bi bi-eye me-1"></i> <?= $luotxem ?> lượt xem</span>
-            </div>
-
             <!-- Chia sẻ -->
             <div class="mt-3">
                 <strong>Chia sẻ:</strong>
-                <a href="#" class="btn btn-outline-secondary btn-sm rounded-circle mx-1"><i class="bi bi-facebook"></i></a>
-                <a href="#" class="btn btn-outline-secondary btn-sm rounded-circle mx-1"><i class="bi bi-twitter"></i></a>
-                <a href="#" class="btn btn-outline-secondary btn-sm rounded-circle mx-1"><i class="bi bi-pinterest"></i></a>
+                <a href="#" class="btn btn-outline-primary btn-sm rounded-circle mx-1"><i class="bi bi-facebook"></i></a>
+                <a href="#" class="btn btn-outline-info btn-sm rounded-circle mx-1"><i class="bi bi-twitter"></i></a>
+                <a href="#" class="btn btn-outline-danger btn-sm rounded-circle mx-1"><i class="bi bi-pinterest"></i></a>
                 <a href="#" class="btn btn-outline-secondary btn-sm rounded-circle mx-1"><i class="bi bi-linkedin"></i></a>
             </div>
         </div>
     </div>
 </div>
+<style>
+    /* Áp dụng cho phần chứa thông tin sản phẩm */
+    .col-md-7 {
+        position: relative;
+        top: -50px;
+        /* Điều chỉnh giá trị âm để dịch chuyển lên trên */
+    }
 
+    /* Nếu muốn điều chỉnh cụ thể cho từng phần tử */
+    h2,
+    h4,
+    .input-group,
+    .btn-warning,
+    .mt-3 {
+        position: relative;
+
+        /* Điều chỉnh giá trị âm để dịch chuyển lên trên */
+    }
+</style>
 <!-- Tabs thông tin phụ -->
 <div class="mt-5">
     <ul class="nav nav-tabs" id="productTabs" role="tablist">
@@ -107,7 +122,20 @@
     <div class="tab-content border rounded-bottom p-3 bg-light" id="productTabsContent">
         <!-- Tab mô tả -->
         <div class="tab-pane fade show active" id="detail" role="tabpanel">
-            <div class="mt-2"><?= $mota ?></div>
+            <div class="short-description">
+                <!-- Mô tả ngắn -->
+                <p><?= substr($mota, 0, 2000) ?> </p> <!-- Giới hạn 3000 ký tự -->
+            </div>
+
+            <div class="full-description" style="display: none;">
+                <!-- Mô tả đầy đủ -->
+                <p><?= $mota ?></p>
+            </div>
+
+            <!-- Nút Xem thêm, căn giữa -->
+            <div class="text-center mt-3">
+                <button class="btn btn-primary" id="toggle-description">Xem thêm</button>
+            </div>
         </div>
 
         <!-- Tab sản phẩm cùng loại -->
@@ -209,4 +237,22 @@
                 function changeMainImage(src) {
                     document.getElementById("mainImage").src = src;
                 }
+            </script>
+            //
+            <script>
+                // Lắng nghe sự kiện click vào nút "Xem thêm"
+                document.getElementById("toggle-description").addEventListener("click", function() {
+                    const fullDesc = document.querySelector(".full-description");
+                    const shortDesc = document.querySelector(".short-description");
+
+                    if (fullDesc.style.display === "none") {
+                        fullDesc.style.display = "block"; // Hiển thị mô tả đầy đủ
+                        shortDesc.style.display = "none"; // Ẩn mô tả ngắn
+                        this.textContent = "Thu gọn"; // Đổi thành "Thu gọn"
+                    } else {
+                        fullDesc.style.display = "none"; // Ẩn mô tả đầy đủ
+                        shortDesc.style.display = "block"; // Hiển thị mô tả ngắn
+                        this.textContent = "Xem thêm"; // Đổi thành "Xem thêm"
+                    }
+                });
             </script>

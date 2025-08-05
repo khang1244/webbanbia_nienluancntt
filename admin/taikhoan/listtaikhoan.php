@@ -24,17 +24,34 @@
 
                         echo '<tr>
                             <td>' . $id . '</td>
-                             <td>' . $user . '</td>
+                            <td>' . $user . '</td>
                             <td>' . $fullname . '</td>
                             <td>' . $email . '</td>
                             <td>' . $address . '</td>
-                            <td>' . $tel . '</td>
-                            <td>' . $role . '</td>
-                            <td>
-                                <a href="' . $xoatk . '" class="btn btn-sm btn-danger" onclick="return confirm(\'Bạn có chắc chắn muốn xóa không?\')">
-                                    <i class="fa-solid fa-trash"></i> Xóa
-                                </a>
-                            </td>
+                            <td>' . $tel . '</td>';
+
+                        // Kiểm tra nếu tài khoản đang đăng nhập là chính dòng này thì không cho đổi vai trò
+                        if (isset($_SESSION['user']) && $_SESSION['user']['id'] == $id) {
+                            $vaitro_text = $role == 1 ? 'Admin (Bạn)' : 'User (Bạn)';
+                            echo '<td>' . $vaitro_text . '</td>';
+                        } else {
+                            echo '<td>
+                                <form method="post" action="index.php?act=capnhatroleadmin" class="d-flex justify-content-center align-items-center gap-2">
+                                    <input type="hidden" name="id" value="' . $id . '">
+                                    <select name="role" class="form-select form-select-sm" style="width: 100px;">
+                                        <option value="0" ' . ($role == 0 ? 'selected' : '') . '>User</option>
+                                        <option value="1" ' . ($role == 1 ? 'selected' : '') . '>Admin</option>
+                                    </select>
+                                    <button type="submit" class="btn btn-sm btn-success">✔</button>
+                                </form>
+                            </td>';
+                        }
+
+                        echo '<td>
+                            <a href="' . $xoatk . '" class="btn btn-sm btn-danger" onclick="return confirm(\'Bạn có chắc chắn muốn xóa không?\')">
+                                <i class="fa-solid fa-trash"></i> Xóa
+                            </a>
+                        </td>
                         </tr>';
                     }
                     ?>

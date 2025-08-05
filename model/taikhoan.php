@@ -32,10 +32,11 @@ function trungtenkhicapnhat($user, $id)
     return $trungtentaikhoancapnhat;
 }
 
-// Hàm loading lấy tất cả tài khoản (trừ admin)
+// Hàm loading lấy tất cả tài khoản 
 function loadall_taikhoan()
 {
-    $sql = "SELECT * FROM taikhoan WHERE role != 1 ORDER BY id DESC";
+    $sql = "SELECT * FROM taikhoan ORDER BY id DESC";
+
     $listtaikhoan = pdo_query($sql);
     return $listtaikhoan;
 }
@@ -63,4 +64,20 @@ function update_password($id, $new_pass_md5)
 {
     $sql = "UPDATE taikhoan SET password = ? WHERE id = ?";
     pdo_execute($sql, $new_pass_md5, $id);
+}
+// Hàm kiểm tra email đã tồn tại chưa khi đăng ký
+function trungemailkhidangky($email)
+{
+    // Viết truy vấn kiểm tra email trong CSDL
+    $sql = "SELECT * FROM taikhoan WHERE email = ?";
+    $stmt = pdo_get_connection()->prepare($sql);
+    $stmt->execute([$email]);
+    $user = $stmt->fetch();
+    return $user ? true : false;
+}
+// Hàm kiểm tra email đã tồn tại chưa khi cập nhật thông tin tài khoản
+function update_role($id, $role)
+{
+    $sql = "UPDATE taikhoan SET role = ? WHERE id = ?";
+    pdo_execute($sql, $role, $id);
 }
