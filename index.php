@@ -373,13 +373,13 @@ if ((isset($_GET['act'])) && ($_GET['act'] != "")) {
             // Hàm kiểm tra sản phẩm đã có trong giỏ chưa
             if (check_product_in_cart($iduser, $idpro)) {
                 // Nếu đã có thì thông báo không cho thêm nữa
-                echo "<script>alert('Sản phẩm đã có trong giỏ hàng! Vui lòng vào giỏ hàng để thay đổi số lượng.'); 
+                echo "<script>alert('Sản phẩm đã có trong giỏ hàng! Vui lòng vào giỏ hàng để thay đổi số lượng sản phẩm.'); 
                 window.location.href='index.php?act=viewcart';</script>";
             } else {
                 // Thêm sản phẩm vào giỏ
                 $result = add_to_cart($iduser, $idpro, $img, $name, $price, $soluong);
                 if ($result) {
-                    echo "<script>alert('Thêm sản phẩm vào giỏ hàng thành công!'); window.location.href='index.php?act=viewcart';</script>";
+                    echo "<script>alert('Thêm sản phẩm vào giỏ hàng thành công!'); window.location.href='index.php';</script>";
                 } else {
                     echo "<script>alert('Thêm sản phẩm thất bại!'); window.location.href='index.php';</script>";
                 }
@@ -431,7 +431,7 @@ if ((isset($_GET['act'])) && ($_GET['act'] != "")) {
                     insert_cart($iduser, $item['idpro'], $item['img'], $item['name'], $item['price'], $item['soluong'], $item['thanhtien'], $idbill);
                 }
 
-                delete_cart_temp_by_user($iduser);
+                //delete_cart_temp_by_user($iduser);
                 $_SESSION['idbill'] = $idbill;
                 header("Location: index.php?act=billcomfirm");
                 exit();

@@ -1,23 +1,46 @@
-<!DOCTYPE html>
-<html lang="vi">
+<?php
+// ob_start(); // Bật bộ đệm output để tránh in linh tinh
 
-<head>
-    <meta charset="UTF-8">
-    <title>Giỏ Hàng</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-    <style>
-        body {
-            background-color: #f8f9fa;
-        }
+// if (session_status() == PHP_SESSION_NONE) {
+//     session_start();
+// }
 
-        .btn {
-            border-radius: 50px;
-        }
-    </style>
-</head>
+include_once "model/pdo.php";
+include_once "model/cart_temp.php";
+include_once "global.php";
+
+if (isset($_POST['update_quantity'])) {
+    while (ob_get_level()) {
+        ob_end_clean(); // Loại bỏ mọi output buffer đang tồn tại
+    }
+
+    header('Content-Type: application/json; charset=utf-8');
+
+    $id = intval($_POST['id']);
+    $soluong = intval($_POST['soluong']);
+
+    pdo_execute("UPDATE cart_temp SET soluong = $soluong WHERE id = $id");
+
+    $row = pdo_query_one("SELECT price, soluong FROM cart_temp WHERE id = $id");
+    $thanhtien = $row['price'] * $row['soluong'];
+
+    $iduser = $_SESSION['user']['id'];
+    $tong = pdo_query_one("SELECT SUM(price * soluong) AS tong FROM cart_temp WHERE iduser = $iduser")['tong'] ?? 0;
+
+    echo json_encode([
+        'thanhtien' => $thanhtien,
+        'tongtien'  => $tong,
+    ]);
+    exit(); // Dừng hẳn script, tránh in phần HTML phía sau
+}
+
+// // Lấy danh sách sản phẩm trong giỏ hàng của user
+// $iduser = $_SESSION['user']['id'];
+// $cart_items = pdo_query("SELECT * FROM cart_temp WHERE iduser = $iduser");
+
+?>
 
 <body>
-
     <div class="container my-5">
         <h3 class="text-center mb-4 text-uppercase fw-bold">
             <i class="bi bi-cart-plus"></i> Giỏ hàng
@@ -47,14 +70,19 @@
 
                             echo '
                             <tr>
-                                <td><img src="' . $hinh . '" alt="" class="img-thumbnail" style="height: 60px;"></td>
-                                <td>' . $item['name'] . '</td>
+                                <td><img src="' . htmlspecialchars($hinh) . '" alt="Ảnh sản phẩm" class="img-thumbnail" style="height: 60px;"></td>
+                                <td>' . htmlspecialchars($item['name']) . '</td>
                                 <td>' . number_format($item['price'], 0, ',', '.') . ' VND</td>
                                 <td>
-                                    <input type="number" name="soluong[' . $item['idpro'] . ']" value="' . $item['soluong'] . '" min="1" class="form-control" style="width: 70px; margin: auto;">
+                                    <input type="number" 
+                                        name="soluong[' . $item['idpro'] . ']" 
+                                        value="' . $item['soluong'] . '" 
+                                        min="1" 
+                                        class="form-control quantity-input" 
+                                        data-id="' . $item['id'] . '"
+                                        style="width: 70px; margin: auto;">
                                 </td>
-
-                                <td>' . number_format($ttien, 0, ',', '.') . ' VND</td>
+                                <td id="thanhtien-' . $item['id'] . '">' . number_format($ttien, 0, ',', '.') . ' VND</td>
                                 <td>' . $xoasp . '</td>
                             </tr>';
                         }
@@ -64,7 +92,7 @@
             </div>
 
             <div class="text-end fw-bold mt-2">
-                Tổng tiền: <span class="text-danger"><?= number_format($tong, 0, ',', '.') ?> VND</span>
+                Tổng tiền: <span class="text-danger fw-bold" id="tongtien"><?= number_format($tong, 0, ',', '.') ?> VND</span>
             </div>
 
             <div class="d-flex justify-content-between mt-4">
@@ -85,7 +113,51 @@
 
     </div>
 
-</body>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        // Hàm định dạng tiền tệ Việt Nam
+        function formatVND(num) {
+            return new Intl.NumberFormat('vi-VN').format(num) + ' VND';
+        }
+        // Cập nhật số lượng sản phẩm
+        $(document).ready(function() {
+            let timer;
+            $(".quantity-input").on("input", function() {
+                clearTimeout(timer);
 
+                let input = $(this);
+                timer = setTimeout(function() {
+                    let id = input.data("id");
+                    let newQty = parseInt(input.val());
+
+                    if (isNaN(newQty) || newQty < 1) {
+                        alert("Số lượng phải >= 1");
+                        input.val(1);
+                        newQty = 1;
+                    }
+
+                    $.ajax({
+                        url: "", // chính file hiện tại
+                        type: "POST",
+                        data: {
+                            update_quantity: true,
+                            id: id,
+                            soluong: newQty
+                        },
+                        success: function(response) {
+                            // Chuyển dữ liệu số sang định dạng tiền
+                            $("#thanhtien-" + id).text(formatVND(response.thanhtien));
+                            $("#tongtien").text(formatVND(response.tongtien));
+                        },
+                        error: function(xhr, status, error) {
+                            alert("Cập nhật số lượng thất bại!");
+                            console.error(xhr.responseText);
+                        }
+                    });
+                }, 500);
+            });
+        });
+    </script>
+</body>
 
 </html>

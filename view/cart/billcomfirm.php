@@ -52,6 +52,7 @@
                     <li><strong>Email:</strong> <?= $bill['bill_email']; ?></li>
                     <li><strong>Điện thoại:</strong> <?= $bill['bill_tel']; ?></li>
                 </ul>
+
             </div>
 
             <!-- Chi tiết giỏ hàng -->

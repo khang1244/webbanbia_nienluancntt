@@ -124,7 +124,7 @@
         <div class="tab-pane fade show active" id="detail" role="tabpanel">
             <div class="short-description">
                 <!-- Mô tả ngắn -->
-                <p><?= substr($mota, 0, 2000) ?> </p> <!-- Giới hạn 3000 ký tự -->
+                <p><?= substr($mota, 0, 1500) ?> </p> <!-- Giới hạn 3000 ký tự -->
             </div>
 
             <div class="full-description" style="display: none;">

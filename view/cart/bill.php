@@ -44,6 +44,7 @@ $cart = load_cart_temp_by_user($iduser); // lấy giỏ hàng từ DB
                 <label class="form-label fw-semibold">📞 Điện thoại</label>
                 <input type="tel" class="form-control rounded-3" name="tel" value="<?= $tel ?>" required>
             </div>
+
         </div>
     </div>
 

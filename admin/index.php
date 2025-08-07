@@ -293,7 +293,7 @@ if (isset($_GET['act'])) {
 
             // Load lại dữ liệu để hiển thị danh sách
             $listdanhmuc = loadall_danhmuc();
-            $limit = 3;
+            $limit = 4;
             $page = 1;
             $start = 0;
             $listsanpham = loadall_sanpham_paginated('', 0, $start, $limit);
