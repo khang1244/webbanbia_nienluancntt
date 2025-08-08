@@ -114,30 +114,29 @@ if (isset($_POST['update_quantity'])) {
     </div>
 
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-toast-plugin/1.3.2/jquery.toast.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-toast-plugin/1.3.2/jquery.toast.min.js"></script>
+
     <script>
-        // Hàm định dạng tiền tệ Việt Nam
         function formatVND(num) {
             return new Intl.NumberFormat('vi-VN').format(num) + ' VND';
         }
-        // Cập nhật số lượng sản phẩm
+
         $(document).ready(function() {
             let timer;
             $(".quantity-input").on("input", function() {
                 clearTimeout(timer);
-
                 let input = $(this);
                 timer = setTimeout(function() {
                     let id = input.data("id");
                     let newQty = parseInt(input.val());
-
                     if (isNaN(newQty) || newQty < 1) {
                         alert("Số lượng phải >= 1");
                         input.val(1);
                         newQty = 1;
                     }
-
                     $.ajax({
-                        url: "", // chính file hiện tại
+                        url: "",
                         type: "POST",
                         data: {
                             update_quantity: true,
@@ -145,11 +144,19 @@ if (isset($_POST['update_quantity'])) {
                             soluong: newQty
                         },
                         success: function(response) {
-                            // Chuyển dữ liệu số sang định dạng tiền
                             $("#thanhtien-" + id).text(formatVND(response.thanhtien));
                             $("#tongtien").text(formatVND(response.tongtien));
+
+                            $.toast({
+                                heading: 'Thành công',
+                                text: 'Cập nhật số lượng thành công!',
+                                icon: 'success',
+                                showHideTransition: 'slide',
+                                hideAfter: 2000,
+                                position: 'top-right'
+                            });
                         },
-                        error: function(xhr, status, error) {
+                        error: function(xhr) {
                             alert("Cập nhật số lượng thất bại!");
                             console.error(xhr.responseText);
                         }

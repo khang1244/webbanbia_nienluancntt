@@ -379,7 +379,7 @@ if ((isset($_GET['act'])) && ($_GET['act'] != "")) {
                 // Thêm sản phẩm vào giỏ
                 $result = add_to_cart($iduser, $idpro, $img, $name, $price, $soluong);
                 if ($result) {
-                    echo "<script>alert('Thêm sản phẩm vào giỏ hàng thành công!'); window.location.href='index.php';</script>";
+                    echo "<script>alert('Thêm sản phẩm vào giỏ hàng thành công!'); window.location.href=' index.php?act=viewcart';</script>";
                 } else {
                     echo "<script>alert('Thêm sản phẩm thất bại!'); window.location.href='index.php';</script>";
                 }

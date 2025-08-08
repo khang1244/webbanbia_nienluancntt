@@ -1,5 +1,8 @@
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-
+<!-- Thêm thư viện jQuery và jquery-toast-plugin -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-toast-plugin/1.3.2/jquery.toast.min.css" />
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-toast-plugin/1.3.2/jquery.toast.min.js"></script>
 <div class="container mt-4">
     <div class="d-flex justify-content-between align-items-center mb-3">
         <h3 class="text-uppercase fw-bold">Danh sách đơn hàng</h3>
@@ -11,7 +14,7 @@
             <input type="text" name="kyw" class="form-control" placeholder="Nhập mã đơn hàng">
         </div>
         <div class="col-auto">
-            <button type="submit" name="listok" class="btn btn-primary">GO</button>
+            <button type="submit" name="listok" class="btn btn-primary">Tìm kiếm</button>
         </div>
     </form>
 
@@ -59,7 +62,7 @@
                 ?>
                     <tr>
                         <td><input type="checkbox" name="chon[]" value="<?= $bill['id'] ?>"></td>
-                        <td><strong>DAM-<?= $bill['id'] ?></strong></td>
+                        <td><strong>LHK-<?= $bill['id'] ?></strong></td>
                         <td class="text-start"><?= $kh ?></td>
                         <td><?= $countsp ?></td>
                         <td><strong><?= number_format($bill['total'], 0, ',', '.') ?></strong> VNĐ</td>
@@ -84,6 +87,5 @@
         </div>
 
     </div>
-
 
 </div>

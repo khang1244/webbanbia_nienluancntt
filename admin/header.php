@@ -24,7 +24,7 @@
                     <li class="nav-item"><a class="nav-link text-white" href="index.php?act=listdm"><i class="fa-solid fa-folder-open me-2"></i>Quản lý Danh mục</a></li>
                     <li class="nav-item"><a class="nav-link text-white" href="index.php?act=listsp"><i class="fa-solid fa-boxes-stacked me-2"></i>Quản lý Sản phẩm</a></li>
                     <li class="nav-item"><a class="nav-link text-white" href="index.php?act=listbl"><i class="fa-solid fa-comments me-2"></i>Quản lý Bình luận</a></li>
-                    <li class="nav-item"><a class="nav-link text-white" href="index.php?act=danhsachkhachhang"><i class="fa-solid fa-users me-2"></i>Quản lý Người dùng</a></li>
+                    <li class="nav-item"><a class="nav-link text-white" href="index.php?act=listtaikhoan"><i class="fa-solid fa-users me-2"></i>Quản lý Người dùng</a></li>
                     <li class="nav-item"><a class="nav-link text-white" href="index.php?act=listdonhang"><i class="fa-solid fa-receipt me-2"></i>Quản lý Đơn hàng</a></li>
                     <li class="nav-item"><a class="nav-link text-white" href="index.php?act=thongke"><i class="fa-solid fa-chart-bar me-2"></i>Thống kê sản phẩm theo loại</a></li>
                 </ul>

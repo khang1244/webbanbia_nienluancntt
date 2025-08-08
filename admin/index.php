@@ -334,6 +334,10 @@ if (isset($_GET['act'])) {
         case 'xoabl':
             if (isset($_GET['id']) && ($_GET['id'] > 0)) {
                 delete_binhluan($_GET['id']);
+                echo "<script>
+                alert('Xóa bình luận thành công!');
+                window.location.href = 'index.php?act=listbl';
+              </script>";
             }
 
             $limit = 8;
@@ -390,11 +394,17 @@ if (isset($_GET['act'])) {
         case 'xoadonhang':
             if (isset($_GET['id']) && ($_GET['id'] > 0)) {
                 delete_donhang($_GET['id']);
+                echo "<script>
+                alert('Xóa đơn hàng thành công!');
+                window.location.href = 'index.php?act=listdonhang';
+              </script>";
+            } else {
+                header('Location: index.php?act=listdonhang');
             }
-            header('Location: index.php?act=listdonhang');
+            exit;
             break;
 
-        case 'danhsachkhachhang':
+        case 'listtaikhoan':
             $listtaikhoan = loadall_taikhoan();
             include "taikhoan/listtaikhoan.php";
             break;
@@ -495,8 +505,11 @@ if (isset($_GET['act'])) {
         case 'xoataikhoanadmin':
             if (isset($_GET['id']) && ($_GET['id'] > 0)) {
                 delete_taikhoan($_GET['id']);
+                echo "<script>
+                alert('Xóa tài khoản thành công!');
+                window.location.href = 'index.php?act=danhsachkhachhang';
+              </script>";
             }
-            header('Location: index.php?act=danhsachkhachhang ');
             break;
         case 'thongketongquan':
             include_once "../model/danhmuc.php";
