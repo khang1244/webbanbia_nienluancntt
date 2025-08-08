@@ -47,12 +47,19 @@
                             </td>';
                         }
 
-                        echo '<td>
-                            <a href="' . $xoatk . '" class="btn btn-sm btn-danger" onclick="return confirm(\'Bạn có chắc chắn muốn xóa không?\')">
-                                <i class="fa-solid fa-trash"></i> Xóa
-                            </a>
-                        </td>
-                        </tr>';
+                        echo '<td>';
+                        if ($role == 1) {
+                            echo '<div class="alert alert-danger" role="alert">
+                            Không thể xóa!
+                            </div>
+                            ';
+                        } else {
+                            // Nếu không phải admin thì hiển thị cả icon và chữ "Xóa"
+                            echo '<a href="' . $xoatk . '" class="btn btn-sm btn-danger" onclick="return confirm(\'Bạn có chắc chắn muốn xóa không?\')">
+                                    <i class="fa-solid fa-trash"></i> Xóa
+                                </a>';
+                        }
+                        echo '</td>';
                     }
                     ?>
                 </tbody>

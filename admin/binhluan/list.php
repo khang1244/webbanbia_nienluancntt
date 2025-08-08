@@ -36,6 +36,12 @@
                     ?>
                 </tbody>
             </table>
+            <style>
+                table {
+                    table-layout: fixed;
+                    width: 100%;
+                }
+            </style>
             <nav>
                 <ul class="pagination justify-content-center mt-4">
                     <?php

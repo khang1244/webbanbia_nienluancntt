@@ -431,7 +431,7 @@ if ((isset($_GET['act'])) && ($_GET['act'] != "")) {
                     insert_cart($iduser, $item['idpro'], $item['img'], $item['name'], $item['price'], $item['soluong'], $item['thanhtien'], $idbill);
                 }
 
-                //delete_cart_temp_by_user($iduser);
+                delete_cart_temp_by_user($iduser);
                 $_SESSION['idbill'] = $idbill;
                 header("Location: index.php?act=billcomfirm");
                 exit();

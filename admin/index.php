@@ -422,7 +422,7 @@ if (isset($_GET['act'])) {
                     $_SESSION['message'] = "Cập nhật vai trò thành công!";
                 }
 
-                header("Location: index.php?act=danhsachkhachhang");
+                header("Location: index.php?act=listtaikhoan");
                 exit;
             }
             break;
@@ -463,7 +463,7 @@ if (isset($_GET['act'])) {
 
                 echo "<script>
                                 alert('Cập nhật thành công!');
-                                window.location.href = 'index.php';
+                                window.location.href = 'index.php?act=listtaikhoan  ';
                               </script>";
                 exit();
             }
@@ -507,7 +507,7 @@ if (isset($_GET['act'])) {
                 delete_taikhoan($_GET['id']);
                 echo "<script>
                 alert('Xóa tài khoản thành công!');
-                window.location.href = 'index.php?act=danhsachkhachhang';
+                window.location.href = 'index.php?act=listtaikhoan';
               </script>";
             }
             break;

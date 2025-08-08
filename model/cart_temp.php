@@ -31,12 +31,12 @@ function tongdonhang_temp($iduser)
     return $tong;
 }
 
-// // // Xóa toàn bộ giỏ hàng của 1 user
-// function delete_cart_temp_by_user($iduser)
-// {
-//     $sql = "DELETE FROM cart_temp WHERE iduser = ?";
-//     pdo_execute($sql, $iduser);
-// }
+// // Xóa toàn bộ giỏ hàng của 1 user khi bấm bắt đầu đặt hàng
+function delete_cart_temp_by_user($iduser)
+{
+    $sql = "DELETE FROM cart_temp WHERE iduser = ?";
+    pdo_execute($sql, $iduser);
+}
 
 // Đếm số lượng sản phẩm trong giỏ hàng tạm của người dùng
 function dem_soluong_giohang($iduser)
