@@ -71,7 +71,7 @@
                         <td>
                             <a href="index.php?act=chitietdonhangadmin&id=<?= $id ?>" class="btn btn-info btn-sm">Chi tiết</a>
                             <a href="index.php?act=suadonhang&id=<?= $bill['id'] ?>" class="btn btn-warning btn-sm">Sửa</a>
-                            <a href="index.php?act=xoadonhang&id=<?= $bill['id'] ?>" onclick="return confirm('Xác nhận xóa?');" class="btn btn-danger btn-sm">Xóa</a>
+                            <a href="index.php?act=xoadonhang&id=<?= $bill['id'] ?>" onclick="return confirm('Bạn có chắc chắn xóa đơn hàng LHK- <?= $bill['id'] ?> không?');" class="btn btn-danger btn-sm">Xóa</a>
                         </td>
                     </tr>
                 <?php endforeach; ?>

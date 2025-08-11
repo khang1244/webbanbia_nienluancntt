@@ -12,12 +12,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_SESSION['user'])) {
     if (!empty($noidung)) {
         $ngaybinhluan = date("Y-m-d H:i:s");
         insert_comment($idpro, $iduser, $noidung, $ngaybinhluan);
+
+        // Lưu thông báo để hiển thị sau khi reload
+        $_SESSION['comment_pending'] = true;
     }
     header("Location: binhluanform.php?idsp=$idpro");
     exit;
 }
 
-// Lấy danh sách bình luận
+// Lấy danh sách bình luận đã duyệt
 $comments = load_comments($idpro);
 ?>
 
@@ -33,6 +36,14 @@ $comments = load_comments($idpro);
 
 <body class="p-2 bg-light">
     <h5 class="text-primary">Bình luận</h5>
+
+    <?php
+    // Hiển thị thông báo "chờ duyệt"
+    if (isset($_SESSION['comment_pending']) && $_SESSION['comment_pending']) {
+        echo '<div class="alert alert-warning">Bình luận của bạn đang chờ admin duyệt.</div>';
+        unset($_SESSION['comment_pending']);
+    }
+    ?>
 
     <?php foreach ($comments as $cmt): ?>
         <div class="border p-2 mb-2 rounded bg-white">

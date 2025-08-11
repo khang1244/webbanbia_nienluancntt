@@ -330,7 +330,14 @@ if (isset($_GET['act'])) {
             include "binhluan/list.php";
             break;
 
-
+        case 'duyetbl':
+            if (isset($_GET['id']) && is_numeric($_GET['id'])) {
+                $id = intval($_GET['id']);
+                $sql = "UPDATE binhluan SET trangthai = 1 WHERE id = ?";
+                pdo_execute($sql, $id);
+            }
+            header("Location: index.php?act=listbl"); // Quay lại danh sách sau khi duyệt
+            break;
         case 'xoabl':
             if (isset($_GET['id']) && ($_GET['id'] > 0)) {
                 delete_binhluan($_GET['id']);

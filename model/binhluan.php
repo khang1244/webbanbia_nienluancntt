@@ -3,7 +3,7 @@
     {
         date_default_timezone_set('Asia/Ho_Chi_Minh'); // Đảm bảo múi giờ VN
         $ngaybinhluan = date("Y-m-d H:i:s");
-        $sql = "INSERT INTO binhluan (noidung, iduser, idpro, ngaybinhluan) VALUES ('$noidung', '$iduser', '$idpro', '$ngaybinhluan')";
+        $sql = "INSERT INTO binhluan (noidung, iduser, idpro, ngaybinhluan, trangthai) VALUES ('$noidung', '$iduser', '$idpro', '$ngaybinhluan', 0)";
         pdo_execute($sql);
     }
     // Hàm lấy bình luận theo ID sản phẩm
@@ -11,7 +11,7 @@
     {
         $sql = "SELECT bl.*, tk.fullname as fullname FROM binhluan bl
                 LEFT JOIN taikhoan tk ON bl.iduser = tk.id
-                WHERE bl.idpro = ?
+                WHERE bl.idpro = ? AND bl.trangthai = 1
                 ORDER BY bl.id DESC";
         return pdo_query($sql, $idpro);
     }

@@ -23,6 +23,7 @@ $dstop10 = loadall_sanpham_top10();
 if ((isset($_GET['act'])) && ($_GET['act'] != "")) {
     $act = $_GET['act'];
     switch ($act) {
+
         // case 'sanpham':
         //     if (isset($_GET['iddm']) && ($_GET['iddm'] > 0)) {
         //         $iddm = $_GET['iddm'];
@@ -473,6 +474,7 @@ if ((isset($_GET['act'])) && ($_GET['act'] != "")) {
                 header("Location: index.php?act=myorder");
             }
             break;
+
         default:
             include 'view/home.php';
             break;
