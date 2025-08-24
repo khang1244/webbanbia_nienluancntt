@@ -20,12 +20,20 @@
                         </div>
                         <div class="mb-3">
                             <label class="form-label">Mật khẩu</label>
-                            <input type="password" class="form-control" name="password" placeholder="********">
+                            <div class="position-relative">
+                                <input type="password" class="form-control" name="password" id="password">
+                                <i class="bi bi-eye-slash toggle-password" toggle="#password"></i>
+                            </div>
                         </div>
+
                         <div class="mb-3">
                             <label class="form-label">Nhập lại mật khẩu</label>
-                            <input type="password" class="form-control" name="repassword" placeholder="********">
+                            <div class="position-relative">
+                                <input type="password" class="form-control" name="repassword" id="repassword">
+                                <i class="bi bi-eye-slash toggle-password" toggle="#repassword"></i>
+                            </div>
                         </div>
+
                         <input type="submit" class="btn btn-primary w-100 py-2 mt-2" name="dangky" value="Đăng ký">
                         <p class="text-center mt-3 mb-0">
                             Đã có tài khoản? <a href="index.php?act=dangnhap" class="text-decoration-none text-primary">Đăng nhập</a>
@@ -45,3 +53,35 @@
 
 
 </body>
+<style>
+    .toggle-password {
+        position: absolute;
+        top: 50%;
+        right: 15px;
+        transform: translateY(-50%);
+        cursor: pointer;
+        color: #888;
+        font-size: 1.2rem;
+    }
+
+    .toggle-password:hover {
+        color: #000;
+    }
+</style>
+
+<script>
+    document.querySelectorAll('.toggle-password').forEach(icon => {
+        icon.addEventListener('click', function() {
+            const input = document.querySelector(this.getAttribute('toggle'));
+            if (input.type === "password") {
+                input.type = "text";
+                this.classList.remove('bi-eye-slash');
+                this.classList.add('bi-eye');
+            } else {
+                input.type = "password";
+                this.classList.remove('bi-eye');
+                this.classList.add('bi-eye-slash');
+            }
+        });
+    });
+</script>

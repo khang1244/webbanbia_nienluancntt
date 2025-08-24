@@ -9,6 +9,15 @@ $cart = load_cart_temp_by_user($iduser); // lấy giỏ hàng từ DB
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
 
 <form action="index.php?act=billcomfirm" method="post">
+    <!-- Xác nhận thông tin đơn hàng -->
+    <div class="card mb-4 shadow-sm border-0 rounded-4">
+        <div class="card-header fw-bold bg-info text-white">
+            <i class="bi bi-check-circle me-2"></i> XÁC NHẬN THÔNG TIN ĐƠN HÀNG
+        </div>
+        <div class="card-body">
+            <p class="text-muted">Vui lòng kiểm tra lại thông tin của bạn trước khi bấm ĐỒNG Ý ĐẶT HÀNG.</p>
+        </div>
+    </div>
     <!-- THÔNG TIN ĐẶT HÀNG -->
     <div class="card mb-4 shadow-sm border-0 rounded-4">
         <div class="card-header fw-bold bg-primary text-white">
