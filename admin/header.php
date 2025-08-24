@@ -20,7 +20,7 @@
                 <div class="text-center py-3 fw-bold fs-4 border-bottom">ADMIN</div>
 
                 <ul class="nav flex-column px-2">
-                    <li class="nav-item"><a class="nav-link text-white" href="index.php?act=thongketongquan"><i class="fa-solid fa-chart-line me-2"></i>Thống kê tổng quan</a></li>
+                    <li class="nav-item"><a class="nav-link text-white" href="index.php?act=thongketongquan"><i class="fa-solid fa-chart-line me-2"></i>Thông tin tổng quan</a></li>
                     <li class="nav-item"><a class="nav-link text-white" href="index.php?act=listdm"><i class="fa-solid fa-folder-open me-2"></i>Quản lý Danh mục</a></li>
                     <li class="nav-item"><a class="nav-link text-white" href="index.php?act=listsp"><i class="fa-solid fa-boxes-stacked me-2"></i>Quản lý Sản phẩm</a></li>
                     <li class="nav-item"><a class="nav-link text-white" href="index.php?act=listbl"><i class="fa-solid fa-comments me-2"></i>Quản lý Bình luận</a></li>

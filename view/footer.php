@@ -9,7 +9,6 @@
                 <li><a href="#" class="text-light text-decoration-none">Chính sách bảo mật</a></li>
                 <li><a href="#" class="text-light text-decoration-none">Điều khoản và điều kiện</a></li>
                 <li><a href="#" class="text-light text-decoration-none">Liên hệ chúng tôi</a></li>
-                <li><a href="#" class="text-light text-decoration-none">Lợi nhuận</a></li>
             </ul>
         </div>
         <div class="col-md-3">
@@ -19,13 +18,11 @@
                 <li><a href="#" class="text-light text-decoration-none">Phiếu quà tặng</a></li>
                 <li><a href="#" class="text-light text-decoration-none">Chi nhánh</a></li>
                 <li><a href="#" class="text-light text-decoration-none">Đặc biệt</a></li>
-                <li><a href="#" class="text-light text-decoration-none">Sơ đồ trang web</a></li>
-                <li><a href="#" class="text-light text-decoration-none">Tài khoản của tôi</a></li>
             </ul>
         </div>
         <div class="col-md-3">
             <h5>Liên Hệ Chúng Tôi</h5>
-            <p class="mb-1">Địa chỉ: HG</p>
+            <p class="mb-1">Địa chỉ: TP.Ngã Bảy tỉnh Hậu Giang</p>
             <p class="mb-1">Điện thoại: (+84) 0762835400</p>
             <p>Email: khangcmc103@gmail.com</p>
         </div>

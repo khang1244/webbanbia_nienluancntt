@@ -10,13 +10,10 @@
     <!-- Các slide -->
     <div class="carousel-inner ">
         <div class="carousel-item active">
-            <img src="images/products/1.jpg" class="d-block w-100" style="height: 400px; object-fit: cover;" alt="Slide 1">
+            <img src="images/products/khangbaner1.jpg" class="d-block w-100" style="height: 400px; object-fit: cover;" alt="Slide 1">
         </div>
         <div class="carousel-item ">
             <img src="images/products/baner2.png" class="d-block w-100" style="height: 400px; object-fit: cover;" alt="Slide 2">
-        </div>
-        <div class="carousel-item ">
-            <img src="images/products/baner1.jpg" class="d-block w-100" style="height: 400px; object-fit: cover;" alt="Slide 3">
         </div>
     </div>
 
@@ -51,7 +48,7 @@
                         <i class="bi bi-shield-check fs-2 text-primary"></i>
                     </div>
                     <h5 class="fw-bold fs-5">Tư vấn nhiệt tình</h5>
-                    <p class="text-muted small mb-0 fs-5">Tư vấn 24/7</p>
+                    <p class="text-muted small mb-0 fs-5">Tư vấn khách hàng 24/7</p>
                 </div>
             </div>
             <div class="col-md-4">
@@ -59,8 +56,8 @@
                     <div class="mb-3">
                         <i class="bi bi-credit-card fs-2 text-warning"></i>
                     </div>
-                    <h5 class="fw-bold fs-5">Thanh toán linh hoạt</h5>
-                    <p class="text-muted small mb-0 fs-5">Hỗ trợ COD, chuyển khoản và thanh toán quốc tế.</p>
+                    <h5 class="fw-bold fs-5">Đổi trả linh hoạt</h5>
+                    <p class="text-muted small mb-0 fs-5">Hỗ trợ đổi trả 100%, nếu hàng bị hỏng trên đường vận chuyển</p>
                 </div>
             </div>
         </div>

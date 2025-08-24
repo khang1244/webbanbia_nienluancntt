@@ -21,11 +21,9 @@
                         <p class="text-center mt-3 mb-0">
                             Chưa có tài khoản? <a href="index.php?act=dangky" class="text-decoration-none text-primary">Đăng ký</a>
                         </p>
-                        <p class="text-center mt-2">
-                            <a href="index.php?act=quenmatkhau" class="text-decoration-none text-primary">Quên mật khẩu?</a>
-                        </p>
-                    </form>
 
+                    </form>
+                    x
                     <?php
                     if (isset($thongbao) && $thongbao != "") {
                         echo '<div class="alert alert-danger mt-3">' . $thongbao . '</div>';

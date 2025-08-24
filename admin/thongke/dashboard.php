@@ -2,7 +2,7 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
 <div class="container py-4">
-    <h2 class="mb-4 fw-bold text-dark">📊 Thống kê tổng quan</h2>
+    <h2 class="mb-4 fw-bold text-dark">📊 Thông tin tổng quan</h2>
     <div class="row g-4">
         <div class="col-md-4 col-sm-6">
             <div class="card shadow-lg border-0 rounded-4 bg-primary text-white h-100 hover-scale">

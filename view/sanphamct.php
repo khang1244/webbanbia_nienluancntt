@@ -75,13 +75,20 @@
                 </button>
             </form>
 
-            <!-- Chia sẻ -->
-            <div class="mt-3">
-                <strong>Chia sẻ:</strong>
-                <a href="#" class="btn btn-outline-primary btn-sm rounded-circle mx-1"><i class="bi bi-facebook"></i></a>
-                <a href="#" class="btn btn-outline-info btn-sm rounded-circle mx-1"><i class="bi bi-twitter"></i></a>
-                <a href="#" class="btn btn-outline-danger btn-sm rounded-circle mx-1"><i class="bi bi-pinterest"></i></a>
-                <a href="#" class="btn btn-outline-secondary btn-sm rounded-circle mx-1"><i class="bi bi-linkedin"></i></a>
+            <!-- Sử dụng d-flex để căn chỉnh "Lượt xem" và "Chia sẻ" theo hàng ngang -->
+            <div class="d-flex justify-content-between align-items-center mb-3 mt-3">
+
+
+                <!-- Chia sẻ -->
+                <div>
+                    <strong>Chia sẻ:</strong>
+                    <a href="#" class="btn btn-outline-primary btn-sm rounded-circle mx-1"><i class="bi bi-facebook"></i></a>
+                    <a href="#" class="btn btn-outline-info btn-sm rounded-circle mx-1"><i class="bi bi-twitter"></i></a>
+                    <a href="#" class="btn btn-outline-danger btn-sm rounded-circle mx-1"><i class="bi bi-pinterest"></i></a>
+                    <a href="#" class="btn btn-outline-secondary btn-sm rounded-circle mx-1"><i class="bi bi-linkedin"></i></a>
+                </div>
+                <!-- Lượt xem -->
+                <span class="badge bg-warning text-dark p-2">Lượt xem: <?= $luotxem ?></span>
             </div>
         </div>
     </div>
