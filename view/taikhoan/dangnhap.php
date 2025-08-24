@@ -23,7 +23,7 @@
                         </p>
 
                     </form>
-                    x
+
                     <?php
                     if (isset($thongbao) && $thongbao != "") {
                         echo '<div class="alert alert-danger mt-3">' . $thongbao . '</div>';

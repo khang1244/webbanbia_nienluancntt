@@ -4,7 +4,7 @@
             <!-- Card chứa form -->
             <div class="card shadow border-0 rounded-4">
                 <div class="card-header bg-primary text-white text-center rounded-top-4">
-                    <h5 class="mb-0 fw-bold">Thêm mới loại hàng hóa</h5>
+                    <h5 class="mb-0 fw-bold">Thêm danh mục</h5>
                 </div>
                 <div class="card-body px-4 py-4">
                     <form action="index.php?act=adddm" method="post">

@@ -1,6 +1,6 @@
 <div class="main-content">
     <div class="container">
-        <h3 class="text-primary fw-bold mb-4">Danh sách bình luận</h3>
+        <h3 class="text-primary fw-bold mb-4">Quản lý bình luận</h3>
 
         <div class="table-responsive">
             <table class="table table-bordered table-striped text-center align-middle">

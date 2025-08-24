@@ -5,7 +5,7 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-toast-plugin/1.3.2/jquery.toast.min.js"></script>
 <div class="container mt-4">
     <div class="d-flex justify-content-between align-items-center mb-3">
-        <h3 class="text-uppercase fw-bold">Danh sách đơn hàng</h3>
+        <h3 class="text-uppercase fw-bold">Quản lý đơn hàng</h3>
 
     </div>
 

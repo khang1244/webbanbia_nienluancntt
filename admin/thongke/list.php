@@ -18,7 +18,7 @@
     <div class="container my-5">
         <div class="card shadow-sm rounded-3">
             <div class="card-body">
-                <h3 class="text-center mb-4">Thống kê sản phẩm theo loại</h3>
+                <h3 class="text-center mb-4">Thống kê sản phẩm theo danh mục</h3>
 
                 <div class="table-responsive">
                     <table class="table table-bordered table-hover table-striped text-center align-middle">
