@@ -24,6 +24,10 @@ if (isset($_GET['act'])) {
             if (isset($_POST['themmoi']) && $_POST['themmoi']) {
                 $tenloai = $_POST['tenloai'];
                 insert_danhmuc($tenloai);
+                echo "<script>
+                            alert('Thêm danh mục thành công!');
+                            window.location.href = 'index.php?act=listdm';
+                        </script>";
             }
             include "danhmuc/add.php";
             break;
@@ -34,6 +38,10 @@ if (isset($_GET['act'])) {
         case 'xoadm':
             if (isset($_GET['id']) && $_GET['id']) {
                 delete_danhmuc($_GET['id']);
+                echo "<script>
+                            alert('Xóa danh mục thành công!');
+                            window.location.href = 'index.php?act=listdm';
+                        </script>";
             }
             $listdanhmuc = loadall_danhmuc();
 
@@ -42,6 +50,10 @@ if (isset($_GET['act'])) {
         case 'suadm':
             if (isset($_GET['id']) && ($_GET['id'] > 0)) {
                 $dm = loadone_danhmuc($_GET['id']); // ✅ đúng hàm để lấy 1 danh mục
+                echo "<script>
+                            alert('Cập nhật danh mục thành công!');
+                            window.location.href = 'index.php?act=listdm';
+                        </script>";
             }
             include "danhmuc/update.php";
             break;
@@ -129,6 +141,10 @@ if (isset($_GET['act'])) {
 
                 // ✅ Gọi hàm thêm sản phẩm có cả ảnh phụ
                 insert_sanpham($tensp, $giasp, $img, $mota, $iddm, $anhphu);
+                echo "<script>
+                            alert('Thêm sản phẩm thành công!');
+                            window.location.href = 'index.php?act=listsp';
+                        </script>";
             }
 
             // Hiển thị form
@@ -197,6 +213,10 @@ if (isset($_GET['act'])) {
             foreach ($listdanhmuc as $dm) {
                 $mapDanhMuc[$dm['id']] = $dm['name'];
             }
+            echo "<script>
+                            alert('Xóa sản phẩm thành công!');
+                            window.location.href = 'index.php?act=listsp';
+                        </script>";
 
             include "sanpham/list.php";
             break;
@@ -208,6 +228,7 @@ if (isset($_GET['act'])) {
 
             }
             $listdanhmuc = loadall_danhmuc(); // lấy danh sách danh mục
+
             include "sanpham/update.php";
             break;
         // case 'updatesp':
@@ -299,13 +320,20 @@ if (isset($_GET['act'])) {
             foreach ($listdanhmuc as $dm) {
                 $mapDanhMuc[$dm['id']] = $dm['name'];
             }
+            echo "<script>
+                            alert('Cập nhật sản phẩm thành công!');
+                            window.location.href = 'index.php?act=listsp';
+                        </script>";
 
             include "sanpham/list.php";
             break;
 
         case 'dangxuat':
             unset($_SESSION['user']); // Xóa thông tin đăng nhập
-            header("Location: index.php"); // Quay về trang chủ
+            echo "<script>
+                            alert('Đăng xuất thành công!');
+                            window.location.href = 'index.php';
+                        </script>";
             exit(); // Dừng chương trình
             break;
         case 'listbl':
@@ -329,8 +357,11 @@ if (isset($_GET['act'])) {
                 $id = intval($_GET['id']);
                 $sql = "UPDATE binhluan SET trangthai = 1 WHERE id = ?";
                 pdo_execute($sql, $id);
+                echo "<script>
+                            alert('Duyệt bình luận thành công!');
+                            window.location.href = 'index.php?act=listbl';
+                        </script>";
             }
-            header("Location: index.php?act=listbl"); // Quay lại danh sách sau khi duyệt
             break;
         case 'xoabl':
             if (isset($_GET['id']) && ($_GET['id'] > 0)) {
@@ -399,8 +430,6 @@ if (isset($_GET['act'])) {
                 alert('Xóa đơn hàng thành công!');
                 window.location.href = 'index.php?act=listdonhang';
               </script>";
-            } else {
-                header('Location: index.php?act=listdonhang');
             }
             exit;
             break;
@@ -420,10 +449,11 @@ if (isset($_GET['act'])) {
                     $_SESSION['message'] = "Bạn không thể đổi vai trò của chính mình!";
                 } else {
                     update_role($id, $role); // <-- bạn cần có hàm này trong model
-                    $_SESSION['message'] = "Cập nhật vai trò thành công!";
+                    echo "<script>
+                            alert('Cập nhật vai trò thành công!');
+                            window.location.href = 'index.php?act=listtaikhoan';
+                        </script>";
                 }
-
-                header("Location: index.php?act=listtaikhoan");
                 exit;
             }
             break;
@@ -461,8 +491,6 @@ if (isset($_GET['act'])) {
                         </script>";
                 exit();
             }
-
-
             include "taikhoan/edit_taikhoan_admin.php";
             break;
         case 'doimatkhauadmin':
@@ -540,8 +568,11 @@ if (isset($_GET['act'])) {
                 $id = $_POST['id'];
                 $bill_status = $_POST['bill_status'];
                 update_bill_status($id, $bill_status);
+                echo "<script>
+                alert('Cập nhật trạng thái đơn hàng thành công!');
+                window.location.href = 'index.php?act=listdonhang';
+              </script>";
             }
-            header("Location: index.php?act=listdonhang");
             break;
         case 'thongke':
             $listthongke = loadall_thongke();
