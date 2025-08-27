@@ -13,9 +13,9 @@ function checkuser($user, $password)
     return $tk;
 }
 // hàm cập nhật tai khoản
-function update_taikhoan($id, $user, $pass, $fullname, $email, $address, $tel)
+function update_taikhoan($id, $user, $fullname, $email, $address, $tel)
 {
-    $sql = "UPDATE taikhoan SET user = '$user', password = '$pass', fullname = '$fullname', email = '$email',address = '$address',tel = '$tel'    WHERE id = $id";
+    $sql = "UPDATE taikhoan SET user = '$user', fullname = '$fullname', email = '$email',address = '$address',tel = '$tel'    WHERE id = $id";
     pdo_execute($sql);
 }
 

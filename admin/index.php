@@ -24,7 +24,6 @@ if (isset($_GET['act'])) {
             if (isset($_POST['themmoi']) && $_POST['themmoi']) {
                 $tenloai = $_POST['tenloai'];
                 insert_danhmuc($tenloai);
-                $thongbao = "Thêm thành công";
             }
             include "danhmuc/add.php";
             break;
@@ -37,7 +36,7 @@ if (isset($_GET['act'])) {
                 delete_danhmuc($_GET['id']);
             }
             $listdanhmuc = loadall_danhmuc();
-            $thongbao = "Thêm thành công";
+
             include "danhmuc/list.php";
             break;
         case 'suadm':
@@ -52,7 +51,6 @@ if (isset($_GET['act'])) {
                 $tenloai = $_POST['tenloai'];
                 $id = $_POST['id'];
                 update_danhmuc($id, $tenloai);
-                $thongbao = 'Cập nhật thành công';
             }
             // sau khi cập nhật xong thì load lại danh sách
             $listdanhmuc = loadall_danhmuc();
@@ -131,9 +129,6 @@ if (isset($_GET['act'])) {
 
                 // ✅ Gọi hàm thêm sản phẩm có cả ảnh phụ
                 insert_sanpham($tensp, $giasp, $img, $mota, $iddm, $anhphu);
-
-                // Thông báo
-                $thongbao = "Thêm thành công";
             }
 
             // Hiển thị form
@@ -288,7 +283,6 @@ if (isset($_GET['act'])) {
 
                 // Cập nhật sản phẩm
                 update_sanpham($id, $iddm, $tensp, $giasp, $mota, $hinh, $anhphu);
-                $thongbao = "Cập nhật thành công";
             }
 
             // Load lại dữ liệu để hiển thị danh sách
@@ -440,40 +434,34 @@ if (isset($_GET['act'])) {
             if (isset($_POST['capnhat'])) {
                 $id = $_POST['id'];
                 $user = $_POST['user'];
-                $password_input = $_POST['password'];
                 $fullname = $_POST['fullname'];
                 $email = $_POST['email'];
                 $address = $_POST['address'];
                 $tel = $_POST['tel'];
 
-                if (!empty($password_input)) {
-                    // Có nhập mật khẩu mới => mã hóa
-                    $pass = md5($password_input);
-                } else {
-                    // Không nhập => giữ nguyên mật khẩu cũ trong session
-                    $pass = $_SESSION['user']['password'];
-                }
+
                 // Kiểm tra trùng tên
                 $check_trung = trungtenkhicapnhat($user, $id);
                 if ($check_trung) {
                     echo "<script>
-                                    alert('Tên đăng nhập đã tồn tại, vui lòng chọn tên khác!');
-                                    window.history.back();
-                                  </script>";
+                                alert('Tên đăng nhập đã tồn tại, vui lòng chọn tên khác!');
+                                window.history.back();
+                            </script>";
                     exit();
                 }
+                update_taikhoan($id, $user, $fullname, $email, $address, $tel);
 
-                update_taikhoan($id, $user, $pass, $fullname, $email, $address, $tel);
+                // Cập nhật lại session 
+                $_SESSION['user'] = load_taikhoan_by_id($id);
 
-                // Cập nhật lại session
-                $_SESSION['user'] = checkuser($user, $pass);
 
                 echo "<script>
-                                alert('Cập nhật thành công!');
-                                window.location.href = 'index.php?act=listtaikhoan  ';
-                              </script>";
+                            alert('Cập nhật thành công!');
+                            window.location.href = 'index.php';
+                        </script>";
                 exit();
             }
+
 
             include "taikhoan/edit_taikhoan_admin.php";
             break;

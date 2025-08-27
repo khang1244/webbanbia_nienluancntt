@@ -30,10 +30,7 @@ if (is_array($dm)) {
                             <input type="reset" value="Nhập lại" class="btn btn-secondary col-4">
                             <a href="index.php?act=listdm" class="btn btn-danger col-4">Danh sách</a>
                         </div>
-                        <?php
-                        if (isset($thongbao) && ($thongbao != ""))
-                            echo $thongbao;
-                        ?>
+
 
                     </form>
                 </div>

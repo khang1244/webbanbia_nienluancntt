@@ -288,7 +288,6 @@ if ((isset($_GET['act'])) && ($_GET['act'] != "")) {
                 $address = $_POST['address'];
                 $tel = $_POST['tel'];
 
-                $pass = $_SESSION['user']['password']; // không đổi mật khẩu ở đây
 
                 // Kiểm tra trùng tên
                 $check_trung = trungtenkhicapnhat($user, $id);
@@ -299,10 +298,11 @@ if ((isset($_GET['act'])) && ($_GET['act'] != "")) {
                             </script>";
                     exit();
                 }
-                update_taikhoan($id, $user, $pass, $fullname, $email, $address, $tel);
+                update_taikhoan($id, $user, $fullname, $email, $address, $tel);
 
-                // Cập nhật lại session
-                $_SESSION['user'] = checkuser($user, $pass);
+                // Cập nhật lại session 
+                $_SESSION['user'] = load_taikhoan_by_id($id);
+
 
                 echo "<script>
                             alert('Cập nhật thành công!');

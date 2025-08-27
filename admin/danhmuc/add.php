@@ -25,10 +25,7 @@
                             <a href="index.php?act=listdm" class="btn btn-danger w-30">Danh sách</a>
                         </div>
 
-                        <?php
-                        if (isset($thongbao) && ($thongbao != ""))
-                            echo '<div class="alert alert-info mt-3 mb-0">' . $thongbao . '</div>';
-                        ?>
+
                     </form>
                 </div>
             </div>
