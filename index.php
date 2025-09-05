@@ -87,11 +87,6 @@ if ((isset($_GET['act'])) && ($_GET['act'] != "")) {
             include "view/home.php";
             break;
 
-
-
-
-
-
         case 'sanphamct':
 
             if (isset($_GET['idsp']) && ($_GET['idsp'] > 0)) {
@@ -107,6 +102,7 @@ if ((isset($_GET['act'])) && ($_GET['act'] != "")) {
             }
 
             break;
+
         case 'dangky':
             if (!empty($_POST['dangky'])) {
                 $email = $_POST['email'];
@@ -177,33 +173,6 @@ if ((isset($_GET['act'])) && ($_GET['act'] != "")) {
             include "view/taikhoan/dangky.php";
             break;
 
-        // case 'dangky':
-        //     if (isset($_POST['dangky']) && ($_POST['dangky'])) {
-        //         $email = $_POST['email'];
-        //         $user = $_POST['user'];
-        //         $fullname = $_POST['fullname'];
-        //         $password = $_POST['password'];
-
-        //         // Kiểm tra tài khoản đã tồn tại hay chưa
-        //         $checkuser = trungtenkhidangky($user);
-        //         if ($checkuser) {
-        //             $thongbao = "Tên đăng nhập đã tồn tại, vui lòng chọn tên khác!";
-        //         } else {
-        //             // Mã hóa mật khẩu
-        //             $password_md5 = md5($password);
-
-        //             // Tiến hành thêm vào CSDL
-        //             insert_taikhoan($email, $user, $fullname, $password_md5);
-        //             $_SESSION['thongbao'] = "Đăng ký thành công, vui lòng đăng nhập!";
-
-        //             // Chuyển hướng sang trang đăng nhập
-        //             header("Location: index.php?act=dangnhap");
-        //             exit(); // dừng thực thi
-        //         }
-        //     }
-        //     include "view/taikhoan/dangky.php";
-        //     break;
-
         case 'dangnhap':
             if (isset($_POST['dangnhap']) && $_POST['dangnhap']) {
                 $user = $_POST['user'];
@@ -236,49 +205,6 @@ if ((isset($_GET['act'])) && ($_GET['act'] != "")) {
             include "view/taikhoan/dangnhap.php";
             break;
 
-
-        // case 'edit_tk':
-
-        //     if (isset($_POST['capnhat'])) {
-        //         $id = $_POST['id'];
-        //         $user = $_POST['user'];
-        //         $password_input = $_POST['password'];
-        //         $fullname = $_POST['fullname'];
-        //         $email = $_POST['email'];
-        //         $address = $_POST['address'];
-        //         $tel = $_POST['tel'];
-
-        //         if (!empty($password_input)) {
-        //             // Có nhập mật khẩu mới => mã hóa
-        //             $pass = md5($password_input);
-        //         } else {
-        //             // Không nhập => giữ nguyên mật khẩu cũ trong session
-        //             $pass = $_SESSION['user']['password'];
-        //         }
-        //         // Kiểm tra trùng tên
-        //         $check_trung = trungtenkhicapnhat($user, $id);
-        //         if ($check_trung) {
-        //             echo "<script>
-        //                         alert('Tên đăng nhập đã tồn tại, vui lòng chọn tên khác!');
-        //                         window.history.back();
-        //                       </script>";
-        //             exit();
-        //         }
-
-        //         update_taikhoan($id, $user, $pass, $fullname, $email, $address, $tel);
-
-        //         // Cập nhật lại session
-        //         $_SESSION['user'] = checkuser($user, $pass);
-
-        //         echo "<script>
-        //                     alert('Cập nhật thành công!');
-        //                     window.location.href = 'index.php';
-        //                   </script>";
-        //         exit();
-        //     }
-
-        //     include "view/taikhoan/edit_tk.php";
-        //     break;
         case 'edit_tk':
             if (isset($_POST['capnhat'])) {
                 $id = $_POST['id'];

@@ -92,7 +92,7 @@ if (isset($_SESSION['user'])) {
                                 <ul class="dropdown-menu dropdown-menu-end">
                                     <?php if (isset($_SESSION['user'])): ?>
                                         <li><a class="dropdown-item" href="index.php?act=edit_tk">Cập nhật thông tin</a></li>
-                                        <li><a class="dropdown-item" href="index.php?act=myorder">Đơn hàng của tui</a></li>
+                                        <li><a class="dropdown-item" href="index.php?act=myorder">Đơn hàng của tôi</a></li>
                                         <li><a class="dropdown-item" href="index.php?act=doimatkhau">Đổi mật khẩu</a></li>
 
                                         <li>
