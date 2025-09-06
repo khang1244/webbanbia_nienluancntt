@@ -71,7 +71,8 @@
                     echo '<tr class="align-middle">
                     <td>' . $id . '</td>
                     <td>' . $hinh . '</td>
-                    <td>' . $name . '</td>
+                    <td style="max-width: 300px; white-space: normal; word-wrap: break-word;">' . $name . '</td>
+
                     <td>' . number_format($price, 0, ',', '.') . ' VND</td>
 
                   <!--  <td style="white-space: normal; word-break: break-word; max-width: 300px; text-align: justify;">' . $mota . '</td>-->

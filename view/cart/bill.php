@@ -1,11 +1,3 @@
-<?php
-include_once "model/cart_temp.php"; // nếu chưa có
-$tong = 0;
-$iduser = $_SESSION['user']['id'];
-$cart = load_cart_temp_by_user($iduser); // lấy giỏ hàng từ DB
-?>
-
-
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
 
 <form action="index.php?act=billcomfirm" method="post">

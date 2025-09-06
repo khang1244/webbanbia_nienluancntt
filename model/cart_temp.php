@@ -44,7 +44,7 @@ function dem_soluong_giohang($iduser)
     $sql = "SELECT COUNT(*) FROM cart_temp WHERE iduser = $iduser";
     return pdo_query_value($sql);
 }
-// Thêm sản phẩm vào giỏ hàng tạm (kiểm tra trùng)
+// Thêm sản phẩm vào giỏ hàng tạm (kiểm tra trùng) nếu chưa có trong giỏ
 function add_to_cart($iduser, $idpro, $img, $name, $price, $soluong_mua)
 {
     // Kiểm tra sản phẩm đã có trong giỏ chưa

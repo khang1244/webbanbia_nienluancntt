@@ -60,7 +60,7 @@
 
                             echo '
                             <tr>
-                                <td><strong>DAM-' . $bill['id'] . '</strong></td>
+                                <td><strong>' . $bill['id'] . '</strong></td>
                                 <td>' . $bill['ngaydathang'] . '</td>
                                 <td>' . $diemsoluongsp . '</td>
                                 <td>' . number_format($total, 0, ",", ".") . ' ₫</td>

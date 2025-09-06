@@ -9,7 +9,7 @@ if (is_array($dm)) {
             <!-- Card chứa form -->
             <div class="card shadow-sm">
                 <div class="card-header bg-primary text-white">
-                    <h4 class="mb-0">Cập nhật loại hàng hóa</h4>
+                    <h4 class="mb-0">Cập nhật danh mục</h4>
                 </div>
                 <div class="card-body">
                     <form action="index.php?act=updatedm" method="post">

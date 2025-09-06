@@ -336,6 +336,7 @@ if ((isset($_GET['act'])) && ($_GET['act'] != "")) {
 
 
         case 'bill':
+            $cart = load_cart_temp_by_user($iduser); // lấy giỏ hàng từ DB
             include "view/cart/bill.php";
             break;
 

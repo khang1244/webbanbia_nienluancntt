@@ -450,7 +450,7 @@ if (isset($_GET['act'])) {
 
                 echo "<script>
                             alert('Cập nhật thành công!');
-                            window.location.href = 'index.php';
+                            window.location.href = 'index.php?act=thongketongquan';
                         </script>";
                 exit();
             }

@@ -9,21 +9,27 @@ include_once "model/pdo.php";
 include_once "model/cart_temp.php";
 include_once "global.php";
 
+
 if (isset($_POST['update_quantity'])) {
+    //Dọn sạch mọi output buffer để không in ra dữ liệu thừa → đảm bảo trả về JSON sạch.
     while (ob_get_level()) {
         ob_end_clean(); // Loại bỏ mọi output buffer đang tồn tại
     }
 
     header('Content-Type: application/json; charset=utf-8');
 
+    //📌 Lấy ID của sản phẩm và số lượng mới từ Ajax và ép kiểu sang số nguyên để bảo mật.
     $id = intval($_POST['id']);
     $soluong = intval($_POST['soluong']);
 
+    //📌 Cập nhật số lượng trong DB 
     pdo_execute("UPDATE cart_temp SET soluong = $soluong WHERE id = $id");
 
+    //📌 Tính lại thành tiền của sản phẩm và tổng tiền của giỏ hàng
     $row = pdo_query_one("SELECT price, soluong FROM cart_temp WHERE id = $id");
     $thanhtien = $row['price'] * $row['soluong'];
 
+    //📌 Tính tổng tiền của giỏ hàng hiện tại
     $iduser = $_SESSION['user']['id'];
     $tong = pdo_query_one("SELECT SUM(price * soluong) AS tong FROM cart_temp WHERE iduser = $iduser")['tong'] ?? 0;
 
@@ -31,12 +37,10 @@ if (isset($_POST['update_quantity'])) {
         'thanhtien' => $thanhtien,
         'tongtien'  => $tong,
     ]);
-    exit(); // Dừng hẳn script, tránh in phần HTML phía sau
+    exit();
 }
 
-// // Lấy danh sách sản phẩm trong giỏ hàng của user
-// $iduser = $_SESSION['user']['id'];
-// $cart_items = pdo_query("SELECT * FROM cart_temp WHERE iduser = $iduser");
+
 
 ?>
 
