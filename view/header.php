@@ -66,7 +66,7 @@ if (isset($_SESSION['user'])) {
                     <!-- Menu trái -->
                     <div class="navbar-nav me-auto gap-2 fs-6">
                         <a class="nav-link active text-white" href="index.php">Trang chủ</a>
-                        <a class="nav-link text-white" href="https://biahoihanoi.vn/gioi-thieu">Giới thiệu</a>
+                        <a class="nav-link text-white" href="">Giới thiệu</a>
                         <a class="nav-link text-white" href="#">Liên hệ</a>
                         <a class="nav-link text-white" href="#">Góp ý</a>
                         <a class="nav-link text-white" href="#">Giải đáp</a>

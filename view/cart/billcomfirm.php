@@ -19,7 +19,7 @@
             <div class="mb-4">
                 <h5 class="fw-bold border-start border-4 ps-3 text-primary">🧾 Thông tin đơn hàng</h5>
                 <ul class="list-unstyled ps-3 mb-0 text-muted">
-                    <li><strong>Mã đơn hàng:</strong> HK-<?= $bill['id']; ?></li>
+                    <li><strong>Mã đơn hàng:</strong> <?= $bill['id']; ?></li>
                     <li><strong>Ngày đặt hàng:</strong> <?= $bill['ngaydathang']; ?></li>
                     <li><strong>Tổng đơn hàng:</strong> <?= number_format($total, 0, ",", ".") ?> VND</li>
                     <li><strong>Phương thức thanh toán:</strong>
