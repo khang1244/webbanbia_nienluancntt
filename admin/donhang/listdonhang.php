@@ -62,7 +62,7 @@
                 ?>
                     <tr>
                         <td><input type="checkbox" name="chon[]" value="<?= $bill['id'] ?>"></td>
-                        <td><strong>LHK-<?= $bill['id'] ?></strong></td>
+                        <td><strong><?= $bill['id'] ?></strong></td>
                         <td class="text-start"><?= $kh ?></td>
                         <td><?= $countsp ?></td>
                         <td><strong><?= number_format($bill['total'], 0, ',', '.') ?></strong> VNĐ</td>

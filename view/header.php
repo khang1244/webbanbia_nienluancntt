@@ -27,7 +27,7 @@ if (isset($_SESSION['user'])) {
 <body class="bg-light">
     <div class="container">
         <!-- Topbar -->
-        <div class="bg-light border-bottom py-4 border"> <!-- tăng từ py-2 lên py-3 -->
+        <div class="bg-light border-bottom py-4 border">
             <div class="container d-flex justify-content-between align-items-center">
                 <!-- Logo + tên -->
                 <div class="d-flex align-items-center gap-2">
@@ -114,12 +114,7 @@ if (isset($_SESSION['user'])) {
                             </div>
                         <?php endif; ?>
 
-
-
-                        <!-- Giỏ hàng
-                        <button class="btn btn-outline-light btn-sm" onclick="alert('Mở giỏ hàng')">
-                            <i class="bi bi-cart3 fs-5"></i>
-                        </button> -->
+                        <!-- // Giỏ hàng -->
                         <a href="index.php?act=viewcart" class="btn btn-outline-light btn-sm position-relative">
                             <i class="bi bi-cart3 fs-5"></i>
                             <?php if ($soluong_cart > 0): ?>

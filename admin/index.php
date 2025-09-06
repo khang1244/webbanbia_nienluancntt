@@ -50,10 +50,6 @@ if (isset($_GET['act'])) {
         case 'suadm':
             if (isset($_GET['id']) && ($_GET['id'] > 0)) {
                 $dm = loadone_danhmuc($_GET['id']); // ✅ đúng hàm để lấy 1 danh mục
-                echo "<script>
-                            alert('Cập nhật danh mục thành công!');
-                            window.location.href = 'index.php?act=listdm';
-                        </script>";
             }
             include "danhmuc/update.php";
             break;
@@ -66,46 +62,13 @@ if (isset($_GET['act'])) {
             }
             // sau khi cập nhật xong thì load lại danh sách
             $listdanhmuc = loadall_danhmuc();
+            echo "<script>
+                alert('Cập nhật danh mục thành công!');
+                window.location.href = 'index.php?act=listdm';
+              </script>";
             include "danhmuc/list.php";
             break;
-        /* controller cho sản phẩm */
-        // case 'addsp':
-        //     // Lấy danh sách danh mục để hiển thị trong form
-        //     $listdanhmuc = loadall_danhmuc();
 
-        //     // Kiểm tra xem người dùng đã submit form chưa
-        //     if (isset($_POST['themmoi']) && ($_POST['themmoi'])) {
-        //         // Lấy dữ liệu từ form
-        //         $iddm = $_POST['iddm'];
-        //         $tensp = $_POST['tensp'];
-        //         $giasp = $_POST['giasp'];
-        //         $mota = $_POST['mota'];
-
-        //         // Lấy tên file ảnh
-        //         $img = $_FILES['hinh']['name'];
-
-        //         // Đường dẫn thư mục lưu file
-        //         $target_dir = "../upload/";
-        //         $target_file = $target_dir . basename($img);
-
-        //         // Di chuyển file từ thư mục tạm sang thư mục lưu trữ
-        //         if (move_uploaded_file($_FILES["hinh"]["tmp_name"], $target_file)) {
-        //             // Upload thành công
-        //         } else {
-        //             // Upload thất bại (có thể log ra hoặc thông báo)
-        //         }
-
-
-        //         // Thêm sản phẩm vào database
-        //         insert_sanpham($tensp, $giasp, $img, $mota, $iddm);
-
-        //         // Gán thông báo
-        //         $thongbao = "Thêm thành công";
-        //     }
-
-        //     // Hiển thị form thêm sản phẩm
-        //     include "sanpham/add.php";
-        //     break;
         case 'addsp':
             // Lấy danh sách danh mục để hiển thị trong form
             $listdanhmuc = loadall_danhmuc();
